@@ -1,0 +1,91 @@
+[gd_scene load_steps=12 format=3 uid="uid://clwo6jrwydvdj"]
+
+[ext_resource type="Script" uid="uid://8gjlasx6f6rr" path="res://scenes/space_ship/space_ship_parent.gd" id="1_hpg4j"]
+[ext_resource type="Script" uid="uid://c27la7hpwn8w7" path="res://scenes/space_ship/camera_3d.gd" id="2_2577w"]
+[ext_resource type="PackedScene" uid="uid://dq6ujivcffw0h" path="res://assets/Spaceship-Jqfed124pQ.glb" id="3_q8sbk"]
+[ext_resource type="Material" uid="uid://dhxyaby72aq4r" path="res://materials/booster.tres" id="4_2577w"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_q8sbk"]
+material = ExtResource("4_2577w")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0xv2w"]
+particle_flag_align_y = true
+emission_shape_scale = Vector3(0.2, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+initial_velocity_min = 5.0
+initial_velocity_max = 15.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.7
+scale_max = 1.5
+color = Color(1, 0.92156863, 0.7176471, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_udu0f"]
+transparency = 1
+albedo_color = Color(1, 1, 0.7019608, 0.29803923)
+
+[sub_resource type="BoxMesh" id="BoxMesh_csyg1"]
+material = SubResource("StandardMaterial3D_udu0f")
+size = Vector3(0.05, 0.05, 0.05)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2577w"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0, 10, 0)
+spread = 0.0
+initial_velocity_min = 75.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.7
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q8sbk"]
+transparency = 1
+albedo_color = Color(1, 0.39297795, 0, 1)
+emission = Color(0.75686276, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_3vtej"]
+material = SubResource("StandardMaterial3D_q8sbk")
+radius = 0.03
+height = 0.4
+
+[node name="SpaceShipParent" type="Node3D"]
+script = ExtResource("1_hpg4j")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+script = ExtResource("2_2577w")
+
+[node name="SpaceShipMesh" parent="Camera3D" instance=ExtResource("3_q8sbk")]
+transform = Transform3D(-0.25, 0, 2.1855694e-08, 0, 0.25, 0, -2.1855694e-08, 0, -0.25, 0, -2, -4)
+
+[node name="Boosters" type="Node3D" parent="Camera3D/SpaceShipMesh"]
+
+[node name="BoosterEmission-C" type="MeshInstance3D" parent="Camera3D/SpaceShipMesh/Boosters"]
+transform = Transform3D(-0.43300742, -8.742278e-08, 2.5035564e-15, 0, -4.371139e-08, -0.6551462, 3.785471e-08, -1, 2.8637348e-08, -2.119441e-07, 0.17114067, -2.4243574)
+mesh = SubResource("PlaneMesh_q8sbk")
+skeleton = NodePath("../..")
+
+[node name="BoosterEmission-R1" type="MeshInstance3D" parent="Camera3D/SpaceShipMesh/Boosters"]
+transform = Transform3D(-0.25616246, -8.742278e-08, 1.8946854e-15, 0, -4.371139e-08, -0.49581304, 2.2394435e-08, -1, 2.1672676e-08, -0.90758836, 0.15467882, -2.1154537)
+mesh = SubResource("PlaneMesh_q8sbk")
+skeleton = NodePath("../..")
+
+[node name="BoosterEmission-L1" type="MeshInstance3D" parent="Camera3D/SpaceShipMesh/Boosters"]
+transform = Transform3D(-0.25616246, -8.742278e-08, 1.8946854e-15, 0, -4.371139e-08, -0.49581304, 2.2394435e-08, -1, 2.1672676e-08, 0.9031514, 0.15467882, -2.1154537)
+mesh = SubResource("PlaneMesh_q8sbk")
+skeleton = NodePath("../..")
+
+[node name="SmokeEffect" type="GPUParticles3D" parent="Camera3D/SpaceShipMesh/Boosters"]
+transform = Transform3D(0.008556783, 0, 1.2014164, 0, 0.475501, 0, -1.006692, 0, 0.010211921, 0.06349326, 0, -2.6546764)
+cast_shadow = 0
+amount = 35
+lifetime = 0.52
+process_material = SubResource("ParticleProcessMaterial_0xv2w")
+draw_pass_1 = SubResource("BoxMesh_csyg1")
+
+[node name="FireEffect" type="GPUParticles3D" parent="Camera3D/SpaceShipMesh/Boosters"]
+transform = Transform3D(1.3150365, -1.2738041e-08, -5.9906824e-08, 1.1491562e-07, -0.0042353696, 0.66562474, -1.18304506e-07, -0.1457062, -0.019348297, -2.39806e-07, 0, -2.743062)
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_2577w")
+draw_pass_1 = SubResource("CapsuleMesh_3vtej")
+
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="."]

@@ -1,0 +1,71 @@
+[gd_scene load_steps=16 format=3 uid="uid://c2c8q4bhllgic"]
+
+[ext_resource type="Texture2D" uid="uid://dv7is476bfft4" path="res://assets/skybox_space_nebula_0.jpg" id="2_v55lt"]
+[ext_resource type="PackedScene" uid="uid://cr4m4o7pydfg2" path="res://assets/Aquaris.glb" id="3_86wku"]
+[ext_resource type="PackedScene" uid="uid://4cg2o40redwr" path="res://assets/Cyberion Prime.glb" id="4_ud2te"]
+[ext_resource type="PackedScene" uid="uid://b33uk6cl5h5b0" path="res://assets/Gloop.glb" id="5_pkh84"]
+[ext_resource type="PackedScene" uid="uid://cxdlgjeat0a3v" path="res://assets/The Junkyard.glb" id="6_338xd"]
+[ext_resource type="PackedScene" uid="uid://bd0ftvtujsjtv" path="res://assets/Volcania.glb" id="7_jl2p6"]
+[ext_resource type="PackedScene" uid="uid://bmagvwx8yyyt1" path="res://assets/Sugar-9.glb" id="8_ewgxa"]
+[ext_resource type="PackedScene" uid="uid://bwmu1bxxhud3m" path="res://assets/Echo Station.glb" id="9_ml77k"]
+[ext_resource type="PackedScene" uid="uid://bepnwefyq57b5" path="res://assets/Nebula X.glb" id="10_c2q4g"]
+[ext_resource type="PackedScene" uid="uid://dxm3tqp85qwjj" path="res://assets/Frostbit.glb" id="11_u5jvq"]
+[ext_resource type="PackedScene" uid="uid://dekv856amuq68" path="res://assets/Bop.glb" id="12_5n0tc"]
+[ext_resource type="PackedScene" uid="uid://clwo6jrwydvdj" path="res://scenes/space_ship/space_ship_parent.tscn" id="13_708qp"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_nrwyk"]
+panorama = ExtResource("2_v55lt")
+
+[sub_resource type="Sky" id="Sky_2wc1w"]
+sky_material = SubResource("PanoramaSkyMaterial_nrwyk")
+
+[sub_resource type="Environment" id="Environment_8jj3j"]
+background_mode = 2
+sky = SubResource("Sky_2wc1w")
+
+[node name="Main3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.70710677, 0.49999997, -0.49999997, 0, 0.70710677, 0.70710677, 0.70710677, -0.49999997, 0.49999997, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8jj3j")
+
+[node name="Planets" type="Node3D" parent="."]
+
+[node name="Aquaris" parent="Planets" instance=ExtResource("3_86wku")]
+transform = Transform3D(105, 0, 0, 0, 105, 0, 0, 0, 105, 521.09045, 87.91632, -1167.9104)
+
+[node name="Frostbit" parent="Planets" instance=ExtResource("11_u5jvq")]
+transform = Transform3D(125, 0, 0, 0, 125, 0, 0, 0, 125, 2596.6433, -858.08716, -6839.668)
+
+[node name="Volcania" parent="Planets" instance=ExtResource("7_jl2p6")]
+transform = Transform3D(103, 0, 0, 0, 103, 0, 0, 0, 103, -983.7773, 149.18878, 981.4607)
+
+[node name="Jungloa" parent="Planets" instance=ExtResource("3_86wku")]
+transform = Transform3D(122, 0, 0, 0, 122, 0, 0, 0, 122, 364.03528, -133.2846, 3865.502)
+
+[node name="Gloop" parent="Planets" instance=ExtResource("5_pkh84")]
+transform = Transform3D(142, 0, 0, 0, 142, 0, 0, 0, 142, -611.5558, 202.28699, -3819.0264)
+
+[node name="The Junkyard" parent="Planets" instance=ExtResource("6_338xd")]
+transform = Transform3D(180, 0, 0, 0, 180, 0, 0, 0, 180, -3699.2285, -253.9813, 966.66895)
+
+[node name="Sugar-9" parent="Planets" instance=ExtResource("8_ewgxa")]
+transform = Transform3D(131, 0, 0, 0, 131, 0, 0, 0, 131, 2383.9053, 743.0549, 650.85547)
+
+[node name="Cyberion Prime" parent="Planets" instance=ExtResource("4_ud2te")]
+transform = Transform3D(130, 0, 0, 0, 130, 0, 0, 0, 130, -1877.4868, -669.74756, -2454.8955)
+
+[node name="Echo Station" parent="Planets" instance=ExtResource("9_ml77k")]
+transform = Transform3D(155, 0, 0, 0, 155, 0, 0, 0, 155, 1503.6487, 727.78186, -2490.5242)
+
+[node name="Nebula X" parent="Planets" instance=ExtResource("10_c2q4g")]
+transform = Transform3D(300, 0, 0, 0, 300, 0, 0, 0, 300, -9018.748, -1539.354, -2715.6978)
+
+[node name="Bop" parent="Planets" instance=ExtResource("12_5n0tc")]
+transform = Transform3D(142, 0, 0, 0, 142, 0, 0, 0, 142, 2186.195, 286.61792, -486.05847)
+
+[node name="Rocks" type="Node3D" parent="."]
+
+[node name="SpaceShipParent" parent="." instance=ExtResource("13_708qp")]

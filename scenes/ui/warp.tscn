@@ -1,0 +1,134 @@
+[gd_scene load_steps=9 format=3 uid="uid://ryys5pxtviwy"]
+
+[ext_resource type="Theme" uid="uid://cta8gkriusni1" path="res://ui/theme.tres" id="1_cgqv0"]
+[ext_resource type="Script" uid="uid://be8cmbvnmlao0" path="res://scenes/ui/warp.gd" id="2_jwl3h"]
+[ext_resource type="Texture2D" uid="uid://bnfluncfhccds" path="res://assets/planet_icons/Aquaris.png" id="2_xckm3"]
+[ext_resource type="Texture2D" uid="uid://ee31ucwynlsn" path="res://assets/planet_icons/Cyberion Prime.png" id="3_2qthc"]
+[ext_resource type="Texture2D" uid="uid://b236jaso77mr4" path="res://assets/planet_icons/Echo Station.png" id="4_jwl3h"]
+[ext_resource type="Texture2D" uid="uid://c57cvuo7yars2" path="res://assets/planet_icons/Frostbit.png" id="5_dqefe"]
+[ext_resource type="Texture2D" uid="uid://h0my01mv4hnh" path="res://assets/planet_icons/Gloop.png" id="6_fv5vm"]
+[ext_resource type="Texture2D" uid="uid://bqkab3nqi1j2k" path="res://assets/planet_icons/Volcania.png" id="7_40b0m"]
+
+[node name="Warp" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_cgqv0")
+script = ExtResource("2_jwl3h")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -549.5
+offset_top = -302.5
+offset_right = 549.5
+offset_bottom = 302.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -256.0
+offset_top = 11.5
+offset_right = 255.5
+offset_bottom = 72.5
+grow_horizontal = 2
+theme = ExtResource("1_cgqv0")
+theme_override_font_sizes/font_size = 50
+text = "WARP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="Panel"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -381.5
+offset_top = -228.0
+offset_right = 381.5
+offset_bottom = 276.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 3
+metadata/_edit_group_ = true
+
+[node name="Aquaris Button" type="Button" parent="Panel/GridContainer"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+theme_override_font_sizes/font_size = 51
+icon = ExtResource("2_xckm3")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Cyberion Prime Button" type="Button" parent="Panel/GridContainer"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+theme_override_font_sizes/font_size = 51
+icon = ExtResource("3_2qthc")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Echo Station Button" type="Button" parent="Panel/GridContainer"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+theme_override_font_sizes/font_size = 51
+icon = ExtResource("4_jwl3h")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Frostbit Button" type="Button" parent="Panel/GridContainer"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+theme_override_font_sizes/font_size = 51
+icon = ExtResource("5_dqefe")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Gloop Button" type="Button" parent="Panel/GridContainer"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+theme_override_font_sizes/font_size = 51
+icon = ExtResource("6_fv5vm")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Volcania Button" type="Button" parent="Panel/GridContainer"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+theme_override_font_sizes/font_size = 51
+icon = ExtResource("7_40b0m")
+icon_alignment = 1
+expand_icon = true
+
+[node name="CloseButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -126.5
+offset_bottom = 113.5
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 50
+text = "X"
+
+[connection signal="pressed" from="Panel/GridContainer/Aquaris Button" to="." method="_on_aquaris_button_pressed"]
+[connection signal="pressed" from="Panel/GridContainer/Cyberion Prime Button" to="." method="_on_cyberion_prime_button_pressed"]
+[connection signal="pressed" from="Panel/GridContainer/Echo Station Button" to="." method="_on_echo_station_button_pressed"]
+[connection signal="pressed" from="Panel/GridContainer/Frostbit Button" to="." method="_on_frostbit_button_pressed"]
+[connection signal="pressed" from="Panel/GridContainer/Gloop Button" to="." method="_on_gloop_button_pressed"]
+[connection signal="pressed" from="Panel/GridContainer/Volcania Button" to="." method="_on_volcania_button_pressed"]
+[connection signal="pressed" from="Panel/CloseButton" to="." method="_on_close_button_pressed"]
