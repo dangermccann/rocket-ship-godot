@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MissionData" load_steps=2 format=3 uid="uid://bsm5bpsgg6dwj"]
+
+[ext_resource type="Script" uid="uid://ty1whsj0yqny" path="res://scripts/mission_data.gd" id="1_50dcf"]
+
+[resource]
+script = ExtResource("1_50dcf")
+mission_id = "test_sequence_mission"
+title = "TEST SEQUENCE MISSION"
+description = "This mission tests Control Input Sequence"
+type = 1
+target = 4
+time_target = 60.0
+target_sequence = Array[String](["6", "BOOSTER_6", "7", "BOOSTER_7"])
+metadata/_custom_type_script = "uid://ty1whsj0yqny"

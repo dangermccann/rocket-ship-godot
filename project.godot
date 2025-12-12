@@ -23,6 +23,7 @@ Serial="*res://scripts/serial.gd"
 ControlPanel="*res://scripts/control_panel.gd"
 PanelController="*res://scripts/panel_controller.gd"
 Planets="*res://scripts/planets.gd"
+MissionManager="*res://scripts/mission_manager.gd"
 
 [display]
 

@@ -34,6 +34,9 @@ func _ready():
 	
 	audio_player.volume_db = 0
 	
+	# TODO: remove this test code
+	#MissionManager.start_mission(load("res://missions/test_sequence_mission.tres"))
+	
 func _process(delta):
 	var velocity = Vector3.ZERO
 

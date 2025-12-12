@@ -33,11 +33,6 @@ func _on_timeout():
 func _enter_tree():
 	unlock_led()
 
-func _unhandled_input(event):
-	if event is InputEventKey:
-		if event.pressed and event.keycode >= KEY_KP_0 and event.keycode <= KEY_KP_9:
-			_on_keypad_event(OS.get_keycode_string(event.key_label).split(" ")[1])
-
 func _process(delta):
 	if unlock_cooldown_running:
 		if(unlock_cooldown > 0):

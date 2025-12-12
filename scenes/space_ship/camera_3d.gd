@@ -11,42 +11,20 @@ var target_mesh_pitch = 0.0 # The desired X-axis rotation for the mesh
 
 @onready var ship_mesh = $SpaceShipMesh
 
-# State management dictionary (just like Godot's Input object)
-var joystick_state = {
-	"joystick_up": false,
-	"joystick_down": false,
-	"joystick_left": false,
-	"joystick_right": false,
-	"joystick_trigger_top": false,
-	"joystick_trigger_front": false,
-	# Add other buttons here
-}
-
-func _ready():
-	# Connect this script's handler function to the global signal
-	GlobalEvents.joystick_input_event.connect(_on_joystick_input)
-	
-# Signal handler function - updates the state dictionary
-func _on_joystick_input(input_action: String, state: bool):
-	if joystick_state.has(input_action):
-		# Update the state (true/false) based on the Arduino event
-		joystick_state[input_action] = state
-
-
 func _process(delta):
 	var rotation_velocity = Vector2.ZERO
 
 	
 	# 1. Yaw (Left/Right look, Y-axis)
-	if Input.is_action_pressed("look_right") or joystick_state.joystick_right:
+	if Input.is_action_pressed("look_right") or ControlPanel.ControlInputs["JOYSTICK_RIGHT"].is_active():
 		rotation_velocity.x -= ROTATION_SPEED
-	if Input.is_action_pressed("look_left") or joystick_state.joystick_left:
+	if Input.is_action_pressed("look_left") or ControlPanel.ControlInputs["JOYSTICK_LEFT"].is_active():
 		rotation_velocity.x += ROTATION_SPEED
 		
 	# 2. Pitch (Up/Down look, X-axis)
-	if Input.is_action_pressed("look_down") or joystick_state.joystick_down:
+	if Input.is_action_pressed("look_down") or ControlPanel.ControlInputs["JOYSTICK_DOWN"].is_active():
 		rotation_velocity.y += ROTATION_SPEED
-	if Input.is_action_pressed("look_up") or joystick_state.joystick_up:
+	if Input.is_action_pressed("look_up") or ControlPanel.ControlInputs["JOYSTICK_UP"].is_active():
 		rotation_velocity.y -= ROTATION_SPEED
 		
 	# Apply Y-axis rotation (Yaw) directly to the parent's Y-axis (global rotation)

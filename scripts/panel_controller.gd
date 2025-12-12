@@ -18,8 +18,8 @@ const TWO_TONE_SOUND_2 = preload("res://audio/twoTone2.ogg")
 func _ready() -> void:
 	GlobalEvents.input_state_changed.connect(_on_input_state_changed)
 
-func _on_input_state_changed(id, state) -> void:
-	var ctl: ControlInput = ControlPanel.find_control_input(id)
+func _on_input_state_changed(full_id, state) -> void:
+	var ctl: ControlInput = ControlPanel.ControlInputs[full_id]
 	
 	if ctl.full_id.begins_with("BOOSTER") and state == ControlInput.PRESSED:
 		GlobalEvents.emit_signal("booster_button", ctl.full_id)
@@ -28,7 +28,6 @@ func _on_input_state_changed(id, state) -> void:
 	match ctl.full_id:
 		"ALARM_OVERRIDE":
 			play_sound(HIGH_DOWN_SOUND)
-			ControlPanel.refresh_state()
 		"POWER":
 			play_sound(HIGH_UP_SOUND)
 		"MODE":

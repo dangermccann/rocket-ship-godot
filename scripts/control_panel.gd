@@ -66,6 +66,12 @@ var ControlInputs: Dictionary[String, ControlInput] = {
 	
 	# Panel 7
 	# Joystick IDs 25 - 30
+ 	"JOYSTICK_UP": ControlInput.new(25, ControlInput.TYPE_BUTTON, "JOYSTICK_UP"),
+	"JOYSTICK_DOWN": ControlInput.new(26, ControlInput.TYPE_BUTTON, "JOYSTICK_DOWN"),
+	"JOYSTICK_RIGHT": ControlInput.new(27, ControlInput.TYPE_BUTTON, "JOYSTICK_RIGHT"),
+	"JOYSTICK_LEFT": ControlInput.new(28, ControlInput.TYPE_BUTTON, "JOYSTICK_LEFT"),
+	"JOYSTICK_TT": ControlInput.new(29, ControlInput.TYPE_BUTTON, "JOYSTICK_TT"),
+	"JOYSTICK_TF": ControlInput.new(30, ControlInput.TYPE_BUTTON, "JOYSTICK_TF"),
 	
 	# Panel 8
 	"VERIFY": 	ControlInput.new(31,  ControlInput.TYPE_SWITCH, "VERIFY"),
@@ -74,23 +80,10 @@ var ControlInputs: Dictionary[String, ControlInput] = {
 }
 
 func _ready() -> void:
-	GlobalEvents.serial_data_received.connect(on_serial_data_received)
-	
-func _process(delta: float) -> void:
-	## TODO: there's got to be a better way to do this
-	# Allow keyboard keys to simulate button presses
-	if Input.is_action_just_pressed("BOOSTER_0"):
-		process_control_input(0, ControlInput.PRESSED)
-	if Input.is_action_just_released("BOOSTER_0"):
-		process_control_input(0, ControlInput.RELEASED)
+	GlobalEvents.serial_data_received.connect(_on_serial_data_received)
+	GlobalEvents.simulated_control_input.connect(_on_simulated_control_input)
 
-	if Input.is_action_just_pressed("BOOSTER_1"):
-		process_control_input(1, ControlInput.PRESSED)
-	if Input.is_action_just_released("BOOSTER_1"):
-		process_control_input(1, ControlInput.RELEASED)
-		
-	
-func on_serial_data_received(data):
+func _on_serial_data_received(data):
 	# Process specific joystick events
 	if data.begins_with("INPUT:") or data.begins_with("KEY:"):
 		var parts = data.split(":")
@@ -103,6 +96,8 @@ func on_serial_data_received(data):
 			elif data.begins_with("KEY:"):
 				process_key(id, state)
 
+func _on_simulated_control_input(id, state):
+	process_control_input(id, state)
 	
 func process_control_input(id, state):
 	var ctl: ControlInput = ControlPanel.find_control_input(id)

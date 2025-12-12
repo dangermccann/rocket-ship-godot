@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8i1hfaw2kwx0"]
+
+[ext_resource type="Theme" uid="uid://cta8gkriusni1" path="res://ui/theme.tres" id="1_kfclf"]
+
+[node name="Debug" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_kfclf")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
+
+[node name="Control Panel" type="Panel" parent="TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="CheckButton" type="CheckButton" parent="TabContainer/Control Panel"]
+layout_mode = 1
+offset_left = 58.0
+offset_top = 111.0
+offset_right = 103.5
+offset_bottom = 148.0
+
+[node name="CheckButton2" type="CheckButton" parent="TabContainer/Control Panel"]
+layout_mode = 1
+offset_left = 65.0
+offset_top = 175.0
+offset_right = 110.5
+offset_bottom = 212.0
+
+[node name="CheckButton3" type="CheckButton" parent="TabContainer/Control Panel"]
+layout_mode = 1
+offset_left = 138.0
+offset_top = 111.0
+offset_right = 183.5
+offset_bottom = 148.0
+
+[node name="Missions" type="PanelContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
