@@ -49,13 +49,15 @@ func _unhandled_key_input(event: InputEvent):
 			Key.KEY_6: input_id = "BOOSTER_6"
 			Key.KEY_7: input_id = "BOOSTER_7"
 			Key.KEY_8: input_id = "BOOSTER_8"
-			Key.KEY_9: input_id = "BOOSTER_9"
 			
 			Key.KEY_Z: input_id = "ALARM_OVERRIDE"
 			Key.KEY_X: input_id = "POWER"
 			Key.KEY_C: input_id = "MODE"
 			Key.KEY_V: input_id = "LAMP"
 			Key.KEY_B: input_id = "ACK"
+			
+			Key.KEY_9: input_id = "JOYSTICK_TF"
+			Key.KEY_P: input_id = "JOYSTICK_TT"
 	else:
 		type = "KEYPAD"
 		match key:

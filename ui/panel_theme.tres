@@ -1,0 +1,11 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dwbylkagb0b1s"]
+
+[ext_resource type="FontFile" uid="uid://dc2kwwiuk2lgh" path="res://ui/fonts/Xolonium-Regular.ttf" id="1_v4i36"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v4i36"]
+bg_color = Color(18.892157, 18.892157, 18.892157, 0.80100006)
+
+[resource]
+default_font = ExtResource("1_v4i36")
+default_font_size = 23
+Panel/styles/panel = SubResource("StyleBoxFlat_v4i36")

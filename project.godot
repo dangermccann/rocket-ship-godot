@@ -35,6 +35,10 @@ window/size/mode.editor=0
 
 enabled=PackedStringArray("res://addons/gdserial/plugin.cfg")
 
+[global_group]
+
+Astroids=""
+
 [input]
 
 move_forward={

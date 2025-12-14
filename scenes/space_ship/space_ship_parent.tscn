@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://clwo6jrwydvdj"]
+[gd_scene load_steps=16 format=3 uid="uid://clwo6jrwydvdj"]
 
 [ext_resource type="Script" uid="uid://8gjlasx6f6rr" path="res://scenes/space_ship/space_ship_parent.gd" id="1_hpg4j"]
 [ext_resource type="Script" uid="uid://c27la7hpwn8w7" path="res://scenes/space_ship/camera_3d.gd" id="2_2577w"]
@@ -48,6 +48,28 @@ material = SubResource("StandardMaterial3D_q8sbk")
 radius = 0.03
 height = 0.4
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_2kvv3"]
+size = Vector3(2.78125, 0.6435547, 2.1555176)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2kvv3"]
+emission_shape_scale = Vector3(15, 15, -5)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0, 0, 1)
+spread = 0.0
+initial_velocity_min = 20.0
+initial_velocity_max = 30.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2kvv3"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 0.193)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qcl01"]
+material = SubResource("StandardMaterial3D_2kvv3")
+size = Vector3(0.1, 0.1, 5)
+
 [node name="SpaceShipParent" type="Node3D"]
 script = ExtResource("1_hpg4j")
 
@@ -88,4 +110,30 @@ amount = 20
 process_material = SubResource("ParticleProcessMaterial_2577w")
 draw_pass_1 = SubResource("CapsuleMesh_3vtej")
 
+[node name="LaserSpawner" type="Node3D" parent="Camera3D/SpaceShipMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.09938e-07, -0.436265, 5.8330097)
+
+[node name="LaserRay" type="RayCast3D" parent="Camera3D/SpaceShipMesh/LaserSpawner"]
+target_position = Vector3(0, -1, 1000)
+collision_mask = 14
+collide_with_areas = true
+
+[node name="Area3D" type="Area3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.9210258, -4.158259)
+collision_mask = 14
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0048828125, -0.06689453, -0.13586426)
+shape = SubResource("BoxShape3D_2kvv3")
+
+[node name="BoostParticals" type="GPUParticles3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.1571667, -23.73413)
+emitting = false
+amount = 50
+explosiveness = 0.1
+process_material = SubResource("ParticleProcessMaterial_2kvv3")
+draw_pass_1 = SubResource("BoxMesh_qcl01")
+
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="body_entered" from="Camera3D/Area3D" to="." method="_on_area_3d_body_entered"]

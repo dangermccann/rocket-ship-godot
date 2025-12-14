@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c2c8q4bhllgic"]
+[gd_scene load_steps=17 format=3 uid="uid://c2c8q4bhllgic"]
 
 [ext_resource type="Texture2D" uid="uid://dv7is476bfft4" path="res://assets/skybox_space_nebula_0.jpg" id="2_v55lt"]
 [ext_resource type="PackedScene" uid="uid://cr4m4o7pydfg2" path="res://assets/Aquaris.glb" id="3_86wku"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dxm3tqp85qwjj" path="res://assets/Frostbit.glb" id="11_u5jvq"]
 [ext_resource type="PackedScene" uid="uid://dekv856amuq68" path="res://assets/Bop.glb" id="12_5n0tc"]
 [ext_resource type="PackedScene" uid="uid://clwo6jrwydvdj" path="res://scenes/space_ship/space_ship_parent.tscn" id="13_708qp"]
+[ext_resource type="PackedScene" uid="uid://qoexvfneqli0" path="res://assets/astroids/Astroid.tscn" id="13_hbx4b"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_nrwyk"]
 panorama = ExtResource("2_v55lt")
@@ -21,12 +22,19 @@ sky_material = SubResource("PanoramaSkyMaterial_nrwyk")
 
 [sub_resource type="Environment" id="Environment_8jj3j"]
 background_mode = 2
+background_energy_multiplier = 0.8
 sky = SubResource("Sky_2wc1w")
+glow_enabled = true
+glow_bloom = 0.2
+adjustment_enabled = true
+adjustment_brightness = 1.05
+adjustment_contrast = 1.05
 
 [node name="Main3D" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.70710677, 0.49999997, -0.49999997, 0, 0.70710677, 0.70710677, 0.70710677, -0.49999997, 0.49999997, 0, 0, 0)
+light_bake_mode = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8jj3j")
@@ -69,3 +77,6 @@ transform = Transform3D(142, 0, 0, 0, 142, 0, 0, 0, 142, 2186.195, 286.61792, -4
 [node name="Rocks" type="Node3D" parent="."]
 
 [node name="SpaceShipParent" parent="." instance=ExtResource("13_708qp")]
+
+[node name="Astroid" parent="." instance=ExtResource("13_hbx4b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1334338, 0, -18.212276)

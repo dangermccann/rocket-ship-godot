@@ -1,0 +1,78 @@
+[gd_scene load_steps=4 format=3 uid="uid://1ojqcw0tb1sl"]
+
+[ext_resource type="Theme" uid="uid://dwbylkagb0b1s" path="res://ui/panel_theme.tres" id="1_weih2"]
+[ext_resource type="Texture2D" uid="uid://bf0jpa3vprtx" path="res://ui/controls/switch_off.png" id="2_kja6w"]
+[ext_resource type="Texture2D" uid="uid://c3aj7h1itapy7" path="res://ui/controls/button_red.png" id="3_38bfo"]
+
+[node name="Panel2" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -369.0
+offset_top = -292.0
+offset_right = 369.0
+offset_bottom = 292.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_weih2")
+
+[node name="Switch0" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 143.0
+offset_top = 61.0
+offset_right = 251.0
+offset_bottom = 169.0
+texture = ExtResource("2_kja6w")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Switch1" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 143.0
+offset_top = 227.0
+offset_right = 251.0
+offset_bottom = 335.0
+texture = ExtResource("2_kja6w")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Switch2" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 143.0
+offset_top = 393.0
+offset_right = 251.0
+offset_bottom = 501.0
+texture = ExtResource("2_kja6w")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Button0" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 109.0
+offset_right = 587.0
+offset_bottom = 256.0
+texture = ExtResource("3_38bfo")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Button1" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 326.0
+offset_right = 587.0
+offset_bottom = 473.0
+texture = ExtResource("3_38bfo")
+expand_mode = 1
+stretch_mode = 4

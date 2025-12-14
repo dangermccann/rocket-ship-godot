@@ -1,0 +1,121 @@
+[gd_scene load_steps=21 format=3 uid="uid://d0skqq2bi4bsn"]
+
+[ext_resource type="Script" uid="uid://bgnfl6odjdory" path="res://assets/effects/impact_effect.gd" id="1_qugs3"]
+[ext_resource type="AudioStream" uid="uid://chqbgwq4f4jdd" path="res://audio/explosionCrunch_002.ogg" id="2_4tlyx"]
+
+[sub_resource type="Curve" id="Curve_t60e0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.8802817, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_qugs3"]
+curve = SubResource("Curve_t60e0")
+
+[sub_resource type="Gradient" id="Gradient_4tlyx"]
+offsets = PackedFloat32Array(0, 0.3575, 0.7525, 1)
+colors = PackedColorArray(0.77603394, 0.64685506, 0, 1, 1.1794108, 0.5409008, 0.36956534, 1, 0.8272272, 0.3102976, 0.22860205, 1, 1, 0, 0.21802102, 0.44200003)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_20tp6"]
+gradient = SubResource("Gradient_4tlyx")
+
+[sub_resource type="Curve" id="Curve_y123i"]
+_data = [Vector2(0, 0.90107435), 0.0, 0.0, 0, 0, Vector2(0.97417843, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_j4x6a"]
+curve = SubResource("Curve_y123i")
+
+[sub_resource type="Curve" id="Curve_8ilca"]
+_data = [Vector2(0.05399061, 0), 0.0, 0.0, 0, 0, Vector2(0.30516434, 1), 0.0, 0.0, 0, 0, Vector2(0.75117373, 0.9825426), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_2ihay"]
+curve = SubResource("Curve_8ilca")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nx6pd"]
+emission_shape = 1
+emission_sphere_radius = 0.5
+angle_min = 1.0728835e-05
+angle_max = 1.0728835e-05
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 2.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_2ihay")
+color = Color(0.50400794, 0.43575165, 0.17892992, 1)
+color_initial_ramp = SubResource("GradientTexture1D_20tp6")
+alpha_curve = SubResource("CurveTexture_qugs3")
+emission_curve = SubResource("CurveTexture_j4x6a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r078p"]
+transparency = 1
+vertex_color_use_as_albedo = true
+emission = Color(0.9699511, 0.53611076, 0, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_nb11b"]
+material = SubResource("StandardMaterial3D_r078p")
+radius = 0.1
+height = 0.2
+
+[sub_resource type="Curve" id="Curve_qugs3"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.6032864, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_4tlyx"]
+curve = SubResource("Curve_qugs3")
+
+[sub_resource type="Curve" id="Curve_20tp6"]
+_data = [Vector2(0, 0.51700985), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_y123i"]
+curve = SubResource("Curve_20tp6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j4x6a"]
+spread = 180.0
+initial_velocity_min = 1.1999999
+initial_velocity_max = 1.4
+gravity = Vector3(0, 0, 0)
+scale_min = 1.5
+scale_max = 1.8
+scale_curve = SubResource("CurveTexture_y123i")
+alpha_curve = SubResource("CurveTexture_4tlyx")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ilca"]
+transparency = 1
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_2ihay"]
+material = SubResource("StandardMaterial3D_8ilca")
+radius = 0.2
+height = 0.4
+
+[node name="ImpactEffect" type="Node3D"]
+script = ExtResource("1_qugs3")
+
+[node name="FireParticles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 75
+lifetime = 0.45
+one_shot = true
+explosiveness = 0.5
+process_material = SubResource("ParticleProcessMaterial_nx6pd")
+draw_pass_1 = SubResource("SphereMesh_nb11b")
+
+[node name="SmokeParticles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 25
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_j4x6a")
+draw_pass_1 = SubResource("SphereMesh_2ihay")
+
+[node name="LifespanTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_4tlyx")
