@@ -39,3 +39,7 @@ enum MissionType {
 # For OBSTICLE_REMOVAL missions
 # The type of obsticle to remove (e.g. astroid) 
 @export var target_obsticle: String
+
+@export var ui_modal: String
+
+@export var start_audio: Resource

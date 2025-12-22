@@ -3,24 +3,28 @@ class_name Led
 var id:int 
 var state:String
 
+const ON = "ON"
+const OFF = "OFF"
+const BLINK = "BLINK"
+
 func _init(_id:int):
 	id = _id
-	state = "OFF"
+	state = "UNKNOWN"
 
 func on():
-	send("LED:" + str(id) + ":ON")
-	state = "On"
-	pass
+	if state != ON:
+		send("LED:" + str(id) + ":ON")
+		state = ON
 	
 func off():
-	send("LED:" + str(id) + ":OFF")
-	state = "Off"
-	pass
+	if state != OFF:
+		send("LED:" + str(id) + ":OFF")
+		state = OFF
 	
 func blink():
-	send("LED:" + str(id) + ":BLINK")
-	state = "BLINK"
-	pass
+	if state != BLINK:
+		send("LED:" + str(id) + ":BLINK")
+		state = BLINK
 	
 func send(msg:String):
 	GlobalEvents.emit_signal("serial_message", msg)

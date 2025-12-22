@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://cuuilyp8tc4iu"]
+
+[ext_resource type="PackedScene" uid="uid://bwmu1bxxhud3m" path="res://assets/Echo Station.glb" id="1_caflj"]
+
+[sub_resource type="Animation" id="Animation_ab473"]
+length = 60.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 60),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.5235988, 0, 0.61086524), Vector3(-0.5235988, 6.2831855, 0.61086524)]
+}
+
+[sub_resource type="Animation" id="Animation_caflj"]
+resource_name = "rotate"
+length = 60.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 60),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.5235988, 0, 0.61086524), Vector3(-0.5235988, 6.2831855, 0.61086524)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ab473"]
+_data = {
+&"RESET": SubResource("Animation_ab473"),
+&"rotate": SubResource("Animation_caflj")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_caflj"]
+
+[node name="Echo Station" instance=ExtResource("1_caflj")]
+
+[node name="RootNode" parent="." index="0"]
+transform = Transform3D(0.81915206, 0.57357645, 0, -0.49673176, 0.7094065, -0.5, -0.28678823, 0.40957603, 0.8660254, 0, 0, 0)
+
+[node name="Planet_10" parent="RootNode" index="0"]
+transform = Transform3D(81.91521, -57.357655, 0, 49.673176, 70.94066, 50, -28.678822, -40.957607, 86.60254, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="RootNode/Planet_10" index="0"]
+libraries = {
+&"": SubResource("AnimationLibrary_ab473")
+}
+autoplay = "RESET"
+
+[node name="Area3D" type="Area3D" parent="RootNode" index="1" groups=["Planets"]]
+collision_layer = 4
+collision_mask = 11
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RootNode/Area3D" index="0"]
+transform = Transform3D(2.535, -1.888722e-08, 3.7774445e-08, 1.8887222e-08, 2.535, -7.554889e-08, -3.7774445e-08, 7.554889e-08, 2.535, 0, 0, 0)
+shape = SubResource("SphereShape3D_caflj")

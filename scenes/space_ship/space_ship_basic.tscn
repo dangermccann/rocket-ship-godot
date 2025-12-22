@@ -1,0 +1,93 @@
+[gd_scene load_steps=13 format=3 uid="uid://cmrd5mjyos2nf"]
+
+[ext_resource type="PackedScene" uid="uid://dq6ujivcffw0h" path="res://assets/Spaceship-Jqfed124pQ.glb" id="1_dp8cb"]
+[ext_resource type="Material" uid="uid://dhxyaby72aq4r" path="res://materials/booster.tres" id="2_bt5oy"]
+[ext_resource type="Script" uid="uid://llxx0iccyo1e" path="res://scenes/space_ship/space_ship_basic.gd" id="2_r8vh5"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jy7xo"]
+material = ExtResource("2_bt5oy")
+
+[sub_resource type="Curve" id="Curve_xntt7"]
+_data = [Vector2(0.028103046, 0.8549108), 0.0, 0.0, 0, 0, Vector2(0.648712, 0.8375001), 0.0, 0.0, 0, 0, Vector2(0.941452, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_w5ed5"]
+curve = SubResource("Curve_xntt7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n0g6o"]
+particle_flag_align_y = true
+emission_shape_scale = Vector3(0.2, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+initial_velocity_min = 5.0
+initial_velocity_max = 15.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.7
+scale_max = 1.5
+color = Color(1, 0.92168134, 0.71796554, 1)
+alpha_curve = SubResource("CurveTexture_w5ed5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_byl6i"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.9342996, 0.9342996, 0.9342996, 0.81200004)
+
+[sub_resource type="SphereMesh" id="SphereMesh_etmnf"]
+material = SubResource("StandardMaterial3D_byl6i")
+radius = 0.3
+height = 0.6
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n8dcg"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0, 10, 0)
+spread = 0.0
+initial_velocity_min = 75.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.7
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q8sbk"]
+transparency = 1
+albedo_color = Color(1, 0.39297795, 0, 1)
+emission = Color(0.75686276, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ivtut"]
+material = SubResource("StandardMaterial3D_q8sbk")
+radius = 0.2
+height = 1.0
+
+[node name="Space Ship Basic" instance=ExtResource("1_dp8cb")]
+script = ExtResource("2_r8vh5")
+
+[node name="Boosters" type="Node3D" parent="RootNode" index="1"]
+
+[node name="BoosterEmission-C" type="MeshInstance3D" parent="RootNode/Boosters" index="0"]
+transform = Transform3D(-0.43300742, -8.742278e-08, 2.5035564e-15, 0, -4.371139e-08, -0.6551462, 3.785471e-08, -1, 2.8637348e-08, -2.119441e-07, 0.17114067, -2.4243574)
+mesh = SubResource("PlaneMesh_jy7xo")
+skeleton = NodePath("../..")
+
+[node name="BoosterEmission-R1" type="MeshInstance3D" parent="RootNode/Boosters" index="1"]
+transform = Transform3D(-0.25616246, -8.742278e-08, 1.8946854e-15, 0, -4.371139e-08, -0.49581304, 2.2394435e-08, -1, 2.1672676e-08, -0.90758836, 0.15467882, -2.1154537)
+mesh = SubResource("PlaneMesh_jy7xo")
+skeleton = NodePath("../..")
+
+[node name="BoosterEmission-L1" type="MeshInstance3D" parent="RootNode/Boosters" index="2"]
+transform = Transform3D(-0.25616246, -8.742278e-08, 1.8946854e-15, 0, -4.371139e-08, -0.49581304, 2.2394435e-08, -1, 2.1672676e-08, 0.9031514, 0.15467882, -2.1154537)
+mesh = SubResource("PlaneMesh_jy7xo")
+skeleton = NodePath("../..")
+
+[node name="SmokeEffect" type="GPUParticles3D" parent="RootNode/Boosters" index="3"]
+transform = Transform3D(0.008556783, 0, 1.2014164, 0, 0.475501, 0, -1.006692, 0, 0.010211921, 0.06349326, 0, -2.6546764)
+cast_shadow = 0
+amount = 35
+lifetime = 0.52
+process_material = SubResource("ParticleProcessMaterial_n0g6o")
+draw_pass_1 = SubResource("SphereMesh_etmnf")
+
+[node name="FireEffect" type="GPUParticles3D" parent="RootNode/Boosters" index="4"]
+transform = Transform3D(1.3150365, 1.8537298e-10, -5.827989e-08, 1.15091616e-07, -0.004235548, 0.66562474, -1.6723333e-09, -0.1457062, -0.019349111, -2.39806e-07, 0, -2.743062)
+amount = 20
+lifetime = 0.14
+process_material = SubResource("ParticleProcessMaterial_n8dcg")
+draw_pass_1 = SubResource("CapsuleMesh_ivtut")

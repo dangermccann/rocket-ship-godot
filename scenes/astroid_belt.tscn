@@ -1,0 +1,95 @@
+[gd_scene load_steps=2 format=3 uid="uid://l6mj1it57w2b"]
+
+[ext_resource type="PackedScene" uid="uid://qoexvfneqli0" path="res://scenes/astroids/Astroid.tscn" id="1_qct6d"]
+
+[node name="AstroidBelt" type="Node3D"]
+
+[node name="Astroid" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(0.5949131, 0, 0, 0, 0.5949131, 0, 0, 0, 0.5949131, -10.2721195, -0.65309715, -12.7453)
+
+[node name="Astroid2" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(0.5, 0, 0, 0, 0.029679343, 0.49911836, 0, -0.49911836, 0.029679343, 14.7924595, 0.9717884, -11.994598)
+
+[node name="Astroid3" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.236802, -0.46807766, -7.636711)
+
+[node name="Astroid4" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5684671, -1.0870953, -12.351227)
+
+[node name="Astroid5" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(0.22364643, 0.15410483, 0.40358832, -0.27602023, 0.40057757, 0, -0.33233216, -0.22899534, 0.27159902, -4.834752, 0, -5.898079)
+
+[node name="Astroid6" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(0.33485055, 0, -0.3713154, 0.1415632, 0.46223643, 0.12766106, 0.34327102, -0.19062394, 0.30956024, -7.351486, -0.82375336, -2.336317)
+
+[node name="Astroid7" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(0.52872634, 0.10131667, 0.1501516, 0, 0.46328926, -0.31261024, -0.18113688, 0.2957365, 0.4382824, 3.3464608, 2.5998478, -15.445633)
+
+[node name="Astroid8" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(0.5360283, -0.31645504, 0.19105615, 0, 0.33653566, 0.5574194, -0.36965695, -0.45888188, 0.27704474, 4.419542, -1.5953252, -5.4656124)
+
+[node name="Astroid9" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(-0.032904606, -0.4809302, 0, 0.4809302, -0.032904606, 0, 0, 0, 0.48205456, -2.1571932, -0.25644016, -23.390274)
+
+[node name="Astroid10" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(0.5681133, -0.26923293, -0.19795941, 0, 0.3904433, -0.5310189, 0.33417705, 0.45770591, 0.33653829, 5.6567574, 0.32962036, -31.847656)
+
+[node name="Astroid11" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(0.18021005, 0, -0.46639505, -0.24570037, 0.42499232, -0.094936, 0.39642864, 0.2634037, 0.15317579, -8.459961, 0.8105736, -31.847656)
+
+[node name="Astroid12" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(0.5, 0, 0, 0, 0.37092358, 0.33528453, 0, -0.33528453, 0.37092358, -8.459961, 2.6066532, -26.30817)
+
+[node name="Astroid13" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(0.37192136, 0, -0.24627209, 0, 0.44606665, 0, 0.24627209, 0, 0.37192136, 3.416112, -0.32597637, -26.30817)
+
+[node name="Astroid14" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(0.29459918, 0.26564956, 0, -0.26564956, 0.29459918, 0, 0, 0, 0.3966842, 6.485778, -0.5796852, -39.54076)
+
+[node name="Astroid15" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(0.37843114, 0.28664523, 0.15692158, -0.26478353, 0.4096761, -0.10979606, -0.19151908, 0, 0.46186626, -1.9403162, 0, -39.54076)
+
+[node name="Astroid16" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(-0.10993905, 0, -0.64704317, 0, 0.42505598, 0, 0.5589182, 0, -0.1272732, -3.1082926, -1.7093754, -32.187458)
+
+[node name="Astroid17" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(-0.052686803, -0.2964714, -0.39916015, 0.49228674, -0.08748573, 0, -0.06984163, -0.3930025, 0.30111656, -3.1082926, -1.2697763, -47.011192)
+
+[node name="Astroid18" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(0.36332625, 0, 0, 0, 0.36332625, 0, 0, 0, 0.36332625, -8.065502, 0, -47.011192)
+
+[node name="Astroid19" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -8.065502, -0.915123, -39.94885)
+
+[node name="Astroid30" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(-0.12030173, 0.38352957, -0.42553422, 0.104337335, 0.4422125, 0.36906454, 0.56328326, 0, -0.15924442, -14.430511, 0, -39.343533)
+
+[node name="Astroid20" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(-0.61697793, -0.5194148, 0, 0.4739877, -0.5630181, 0.32984808, -0.21243212, 0.25233382, 0.7359713, 4.826872, 1.0303221, -45.38289)
+
+[node name="Astroid27" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(0.39076346, 0.063620195, -0.6003665, -0.60372794, 0.041178226, -0.38858777, 0, 0.7151506, 0.07578374, 10.304915, 0.9803057, -49.09548)
+
+[node name="Astroid28" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(-0.37962165, 0, -0.069571055, 0, 0.477298, 0, 0.04421244, 0, -0.5973586, 10.304915, -1.5372181, -57.221146)
+
+[node name="Astroid29" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(0.48977533, -0.1005988, 0, 0.091803476, 0.44695443, 0.20445994, -0.041136846, -0.20027886, 0.45628515, 10.304915, 0, -35.22012)
+
+[node name="Astroid21" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(0.06268636, 0, 0.6505464, 0.25607923, -0.6007951, -0.02467568, 0.5980251, 0.2572653, -0.05762543, -0.6058464, -1.7123747, -51.76085)
+
+[node name="Astroid25" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(-0.44042665, 0.2065999, -0.115502656, 0.199842, 0.4553202, 0.052408915, 0.12683673, 0, -0.48364496, -6.9618826, -3.295353, -66.2864)
+
+[node name="Astroid26" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(-0.25776523, 0, -1.105582, 0, 1.1352333, 0, 1.105582, 0, -0.25776523, 9.48001, 0, -66.2864)
+
+[node name="Astroid24" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(-0.5263101, 0.28154296, 0, -0.28154296, -0.5263101, 0, 0, 0, 0.5968825, 2.5354357, 0.54222107, -59.92974)
+
+[node name="Astroid22" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -14.050511, 0, -55.195023)
+
+[node name="Astroid23" parent="." instance=ExtResource("1_qct6d")]
+transform = Transform3D(0.10210252, 0.48889893, 0.023514032, 0.47642794, -0.10477516, 0.10972053, 0.11221187, 0, -0.48724583, -14.050511, 0, -55.195023)

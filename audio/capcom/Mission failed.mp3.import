@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://iioekewltae4"
+path="res://.godot/imported/Mission failed.mp3-3ef790823ecb0d54aa4b2a7c8943b653.mp3str"
+
+[deps]
+
+source_file="res://audio/capcom/Mission failed.mp3"
+dest_files=["res://.godot/imported/Mission failed.mp3-3ef790823ecb0d54aa4b2a7c8943b653.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

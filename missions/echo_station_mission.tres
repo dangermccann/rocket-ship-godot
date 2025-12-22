@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MissionData" load_steps=3 format=3 uid="uid://jfag7a5hvcqm"]
+
+[ext_resource type="Script" uid="uid://ty1whsj0yqny" path="res://scripts/mission_data.gd" id="1_aieua"]
+[ext_resource type="AudioStream" uid="uid://dh2qfn2eqdhch" path="res://audio/capcom/echo_station_start.mp3" id="2_582p5"]
+
+[resource]
+script = ExtResource("1_aieua")
+mission_id = "test_obj_removal"
+title = "TEST OBJ REMOVAL"
+description = "Destroy 5 Astroids"
+type = 3
+target = 5
+time_target = 45.0
+target_obsticle = "Astroid"
+ui_modal = "COLLECTION"
+start_audio = ExtResource("2_582p5")
+metadata/_custom_type_script = "uid://ty1whsj0yqny"

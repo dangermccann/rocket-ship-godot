@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=3 uid="uid://05f23cgisn0o"]
+
+[ext_resource type="Script" uid="uid://cv351ukaoejqd" path="res://scenes/ui/missions/mission_complete.gd" id="1_i5v6r"]
+[ext_resource type="Theme" uid="uid://cta8gkriusni1" path="res://ui/theme.tres" id="1_ispmp"]
+[ext_resource type="Texture2D" uid="uid://cyrgeab5o24co" path="res://ui/images/star.png" id="2_x3d3x"]
+
+[sub_resource type="Theme" id="Theme_i5v6r"]
+
+[node name="MissionComplete" type="CanvasLayer"]
+script = ExtResource("1_i5v6r")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -368.0
+offset_top = -213.0
+offset_right = 368.0
+offset_bottom = 213.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ispmp")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -312.0
+offset_top = -65.0
+offset_right = 312.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+text = "Mission Successful!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+modulate = Color(0.77072823, 0.40659744, 1, 1)
+layout_mode = 0
+offset_left = 283.0
+offset_top = 30.0
+offset_right = 411.0
+offset_bottom = 158.0
+theme = SubResource("Theme_i5v6r")
+texture = ExtResource("2_x3d3x")
+
+[node name="TextureRect2" type="TextureRect" parent="Panel"]
+modulate = Color(0, 1, 0.805388, 1)
+layout_mode = 0
+offset_left = 123.0
+offset_top = 30.0
+offset_right = 251.0
+offset_bottom = 158.0
+theme = SubResource("Theme_i5v6r")
+texture = ExtResource("2_x3d3x")
+
+[node name="TextureRect3" type="TextureRect" parent="Panel"]
+modulate = Color(1, 0.5960155, 0.91933554, 1)
+layout_mode = 0
+offset_left = 456.0
+offset_top = 30.0
+offset_right = 584.0
+offset_bottom = 158.0
+theme = SubResource("Theme_i5v6r")
+texture = ExtResource("2_x3d3x")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

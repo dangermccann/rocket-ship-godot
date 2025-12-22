@@ -1,0 +1,101 @@
+[gd_scene load_steps=21 format=3 uid="uid://c2c8q4bhllgic"]
+
+[ext_resource type="Script" uid="uid://blake2ks6d7u4" path="res://scenes/space.gd" id="1_kxs86"]
+[ext_resource type="Texture2D" uid="uid://dv7is476bfft4" path="res://assets/skybox_space_nebula_0.jpg" id="2_v55lt"]
+[ext_resource type="PackedScene" uid="uid://coa31ejess76b" path="res://scenes/planets/frostbit.tscn" id="4_7wx0h"]
+[ext_resource type="PackedScene" uid="uid://b8eb7dds2vpyo" path="res://scenes/planets/volcania.tscn" id="5_7wx0h"]
+[ext_resource type="PackedScene" uid="uid://por33ivdxc3m" path="res://scenes/planets/jungola.tscn" id="6_skhc4"]
+[ext_resource type="PackedScene" uid="uid://d3caa7hebj8ol" path="res://scenes/planets/gloop.tscn" id="7_tc3qt"]
+[ext_resource type="PackedScene" uid="uid://ce30dphoxf0sp" path="res://scenes/planets/the_junkyard.tscn" id="8_7wx0h"]
+[ext_resource type="PackedScene" uid="uid://c1uooxris4rwn" path="res://scenes/planets/sugar-9.tscn" id="9_7wx0h"]
+[ext_resource type="PackedScene" uid="uid://t5vucxfumheo" path="res://scenes/planets/cyberion_prime.tscn" id="10_skhc4"]
+[ext_resource type="PackedScene" uid="uid://cuuilyp8tc4iu" path="res://scenes/planets/echo_station.tscn" id="11_7wx0h"]
+[ext_resource type="PackedScene" uid="uid://oksnrv1uhhvs" path="res://scenes/planets/nebula_x.tscn" id="12_skhc4"]
+[ext_resource type="PackedScene" uid="uid://bkyas3iheh53u" path="res://scenes/planets/aquaris.tscn" id="13_7wx0h"]
+[ext_resource type="PackedScene" uid="uid://clwo6jrwydvdj" path="res://scenes/space_ship/space_ship_parent.tscn" id="13_708qp"]
+[ext_resource type="PackedScene" uid="uid://omyfbclix3p1" path="res://scenes/planets/bop.tscn" id="13_tc3qt"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_nrwyk"]
+panorama = ExtResource("2_v55lt")
+
+[sub_resource type="Sky" id="Sky_2wc1w"]
+sky_material = SubResource("PanoramaSkyMaterial_nrwyk")
+
+[sub_resource type="Environment" id="Environment_8jj3j"]
+background_mode = 2
+background_energy_multiplier = 0.8
+sky = SubResource("Sky_2wc1w")
+glow_enabled = true
+glow_bloom = 0.2
+adjustment_enabled = true
+adjustment_brightness = 1.05
+adjustment_contrast = 1.05
+
+[sub_resource type="Animation" id="Animation_hbx4b"]
+resource_name = "Aquaris"
+length = 10.0
+loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_kxs86"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v55lt"]
+_data = {
+&"Aquaris": SubResource("Animation_hbx4b"),
+&"RESET": SubResource("Animation_kxs86")
+}
+
+[node name="Space" type="Node3D"]
+script = ExtResource("1_kxs86")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.70710677, 0.49999997, -0.49999997, 0, 0.70710677, 0.70710677, 0.70710677, -0.49999997, 0.49999997, 0, 0, 0)
+light_bake_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8jj3j")
+
+[node name="Planets" type="Node3D" parent="."]
+
+[node name="Aquaris" parent="Planets" instance=ExtResource("13_7wx0h")]
+transform = Transform3D(105, 0, 0, 0, 105, 0, 0, 0, 105, 521, 88, -1878)
+
+[node name="Frostbit" parent="Planets" instance=ExtResource("4_7wx0h")]
+transform = Transform3D(125, 0, 0, 0, 125, 0, 0, 0, 125, 3178, -858, -7325)
+
+[node name="Volcania" parent="Planets" instance=ExtResource("5_7wx0h")]
+transform = Transform3D(103, 0, 0, 0, 103, 0, 0, 0, 103, -1679, 149, 1776)
+
+[node name="Jungola" parent="Planets" instance=ExtResource("6_skhc4")]
+transform = Transform3D(122, 0, 0, 0, 122, 0, 0, 0, 122, 364, -133, 3865)
+
+[node name="Gloop" parent="Planets" instance=ExtResource("7_tc3qt")]
+transform = Transform3D(142, 0, 0, 0, 142, 0, 0, 0, 142, -611, 202, -4650)
+
+[node name="The Junkyard" parent="Planets" instance=ExtResource("8_7wx0h")]
+transform = Transform3D(180, 0, 0, 0, 180, 0, 0, 0, 180, -6407, -256, 967)
+
+[node name="Sugar-9" parent="Planets" instance=ExtResource("9_7wx0h")]
+transform = Transform3D(131, 0, 0, 0, 131, 0, 0, 0, 131, 2383, 1432, 2238)
+
+[node name="Cyberion Prime" parent="Planets" instance=ExtResource("10_skhc4")]
+transform = Transform3D(130, 0, 0, 0, 130, 0, 0, 0, 130, -2843, 670, -2455)
+
+[node name="Echo Station" parent="Planets" instance=ExtResource("11_7wx0h")]
+transform = Transform3D(155, 0, 0, 0, 155, 0, 0, 0, 155, 3142, 728, -2490)
+
+[node name="Nebula X" parent="Planets" instance=ExtResource("12_skhc4")]
+transform = Transform3D(300, 0, 0, 0, 300, 0, 0, 0, 300, -9019, -1540, -2716)
+
+[node name="Bop" parent="Planets" instance=ExtResource("13_tc3qt")]
+transform = Transform3D(142, 0, 0, 0, 142, 0, 0, 0, 142, 2957, 287, -356)
+
+[node name="Belt" type="Node3D" parent="."]
+
+[node name="SpaceShipParent" parent="." instance=ExtResource("13_708qp")]
+
+[node name="PlanetRotator" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_v55lt")
+}
+autoplay = "Aquaris"

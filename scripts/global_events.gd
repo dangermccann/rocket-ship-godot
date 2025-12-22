@@ -26,6 +26,8 @@ signal ui_modal_closed()
 
 signal warp_to(planet)
 
+signal arrived_at_planet(planet)
+
 func _unhandled_key_input(event: InputEvent):
 	if event is not InputEventKey:
 		return
@@ -39,6 +41,19 @@ func _unhandled_key_input(event: InputEvent):
 	var type = "INPUT"
 	
 	if shift:
+		type = "KEYPAD"
+		match key:
+			Key.KEY_0: input_id = "0"
+			Key.KEY_1: input_id = "1"
+			Key.KEY_2: input_id = "2"
+			Key.KEY_3: input_id = "3"
+			Key.KEY_4: input_id = "4"
+			Key.KEY_5: input_id = "5"
+			Key.KEY_6: input_id = "6"
+			Key.KEY_7: input_id = "7"
+			Key.KEY_8: input_id = "8"
+			Key.KEY_9: input_id = "9"
+	else:
 		match key:
 			Key.KEY_0: input_id = "BOOSTER_0"
 			Key.KEY_1: input_id = "BOOSTER_1"
@@ -56,21 +71,10 @@ func _unhandled_key_input(event: InputEvent):
 			Key.KEY_V: input_id = "LAMP"
 			Key.KEY_B: input_id = "ACK"
 			
-			Key.KEY_9: input_id = "JOYSTICK_TF"
+			Key.KEY_SPACE: input_id = "JOYSTICK_TF"
 			Key.KEY_P: input_id = "JOYSTICK_TT"
-	else:
-		type = "KEYPAD"
-		match key:
-			Key.KEY_0: input_id = "0"
-			Key.KEY_1: input_id = "1"
-			Key.KEY_2: input_id = "2"
-			Key.KEY_3: input_id = "3"
-			Key.KEY_4: input_id = "4"
-			Key.KEY_5: input_id = "5"
-			Key.KEY_6: input_id = "6"
-			Key.KEY_7: input_id = "7"
-			Key.KEY_8: input_id = "8"
-			Key.KEY_9: input_id = "9"
+		
+		
 		 
 	if input_id != "":
 		get_viewport().set_input_as_handled()

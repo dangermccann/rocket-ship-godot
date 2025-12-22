@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="MissionData" load_steps=3 format=3 uid="uid://bsabygo53wqlx"]
+
+[ext_resource type="Script" uid="uid://ty1whsj0yqny" path="res://scripts/mission_data.gd" id="1_qx12e"]
+[ext_resource type="AudioStream" uid="uid://fdtvi2thxbq0" path="res://audio/capcom/volcania_start.mp3" id="2_wuh2t"]
+
+[resource]
+script = ExtResource("1_qx12e")
+mission_id = "volcania_mission"
+title = "Volcania Mission"
+description = "Deploy Head Shields"
+target = 1
+time_target = 15.0
+target_state = Dictionary[String, String]({
+"PYRO_1": "ON",
+"PYRO_3": "ON",
+"PYRO_5": "ON"
+})
+ui_modal = "PANEL_3"
+start_audio = ExtResource("2_wuh2t")
+metadata/_custom_type_script = "uid://ty1whsj0yqny"

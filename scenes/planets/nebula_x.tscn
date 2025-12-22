@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://oksnrv1uhhvs"]
+
+[ext_resource type="PackedScene" uid="uid://bepnwefyq57b5" path="res://assets/Nebula X.glb" id="1_t6qus"]
+
+[sub_resource type="Animation" id="Animation_o612i"]
+resource_name = "rotation"
+length = 90.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 90),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(4.371139e-08, 0, 0), Vector3(0, 6.2831855, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lvb8c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(4.371139e-08, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r63oe"]
+_data = {
+&"RESET": SubResource("Animation_lvb8c"),
+&"rotation": SubResource("Animation_o612i")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_e3dwp"]
+
+[node name="Nebula X" instance=ExtResource("1_t6qus")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="RootNode/Planet_6" index="0"]
+libraries = {
+&"": SubResource("AnimationLibrary_r63oe")
+}
+autoplay = "rotation"
+
+[node name="Area3D" type="Area3D" parent="RootNode" index="1" groups=["Planets"]]
+collision_layer = 4
+collision_mask = 11
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RootNode/Area3D" index="0"]
+transform = Transform3D(3.77, 0, 0, 0, 3.77, 0, 0, 0, 3.77, 0, 0, 0)
+shape = SubResource("SphereShape3D_e3dwp")

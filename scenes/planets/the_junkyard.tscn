@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://ce30dphoxf0sp"]
+
+[ext_resource type="PackedScene" uid="uid://cxdlgjeat0a3v" path="res://assets/The Junkyard.glb" id="1_sv07c"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5punj"]
+
+[node name="The Junkyard" instance=ExtResource("1_sv07c")]
+
+[node name="Area3D" type="Area3D" parent="RootNode" index="1" groups=["Planets"]]
+collision_layer = 4
+collision_mask = 11
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RootNode/Area3D" index="0"]
+transform = Transform3D(2.29, 0, 0, 0, 2.29, 0, 0, 0, 2.29, 0, 0, 0)
+shape = SubResource("SphereShape3D_5punj")

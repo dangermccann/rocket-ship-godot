@@ -5,16 +5,27 @@ signal mission_progress(mission: MissionData, current: int)
 signal mission_completed(mission: MissionData)
 signal mission_failed(mission: MissionData)
 
-var current_mission: MissionData
-var current_progress: int
-var current_time: float
+const MISSION_IN_PROGRESS = 0
+const MISSION_FAILED = 1
+const MISSION_SUCCESS = 2
 
 const COLLECTION_EVENT = "COLLECTION"
 const REMOVAL_EVENT = "REMOVAL"
 
+var current_mission: MissionData
+var current_progress: int
+var current_time: float
+var ui_node: Node
+var last_mission_outcome: int
+
+const SEQUENCE_CHARS: Array[String] = [
+	'A', 'B', 'C', 'D', '*', '#', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
+]
+
 func _ready() -> void:
 	GlobalEvents.input_state_changed.connect(_on_input_state_changed)
 	GlobalEvents.keypad_event.connect(_on_keypad_event)
+	last_mission_outcome = -1
 
 func _process(delta: float) -> void:
 	if current_mission != null:
@@ -62,15 +73,36 @@ func check_sequence_input(input):
 		emit_signal("mission_progress", current_mission, current_progress)
 		_check_complete()
 	else:
-		current_progress	 = 0
+		current_progress = 0
 		emit_signal("mission_progress", current_mission, current_progress)
 
 func start_mission(mission: MissionData):
+	unload()
+	
+	last_mission_outcome = MISSION_IN_PROGRESS
 	current_mission = mission
 	current_progress = 0
 	current_time = 0
+	
+	if current_mission.type == MissionData.MissionType.CONTROL_INPUT_SEQUENCE:
+		if current_mission.target_sequence == null or current_mission.target_sequence.size() == 0:
+			current_mission.target_sequence = []
+			for i in range(4):
+				current_mission.target_sequence.push_back(SEQUENCE_CHARS[randi_range(0, SEQUENCE_CHARS.size() - 1)])
+	
+	if mission.ui_modal != null and mission.ui_modal.length() > 0:
+		ui_node = GlobalState.modal_ui(mission.ui_modal)
+		if ui_node.has_method("set_mission"):
+			ui_node.call_deferred("set_mission", mission)
+	else: 
+		ui_node = null
+	
 	emit_signal("mission_started", current_mission)
 	print("Starting mission ", mission.title)
+	
+func fail_mission():
+	if current_mission != null:
+		fail()
 	
 func log_event(event: String, data: Dictionary[String, String]):
 	if current_mission == null:
@@ -79,10 +111,12 @@ func log_event(event: String, data: Dictionary[String, String]):
 	if current_mission.type == MissionData.MissionType.ITEM_COLLECTION and event == COLLECTION_EVENT:
 		if data["type"] == current_mission.target_item:
 			record_progress(int(data["quantity"]))
+			return
 
 	if current_mission.type == MissionData.MissionType.OBSTICLE_REMOVAL and event == REMOVAL_EVENT:
-		if data["type"] == current_mission.target_item:
+		if data["type"] == current_mission.target_obsticle:
 			record_progress(int(data["quantity"]))
+			return
 
 func record_progress(progress: int):
 	current_progress += progress
@@ -90,15 +124,23 @@ func record_progress(progress: int):
 	_check_complete()
 
 func fail():
+	last_mission_outcome = MISSION_FAILED
 	emit_signal("mission_failed", current_mission)
 	print("Failed mission ", current_mission.title)
+	unload()
+	
+func unload():
 	current_mission = null
+	
+	if ui_node != null:
+		GlobalEvents.emit_signal("ui_modal_closed")
+		ui_node.queue_free()
 	
 func _check_complete():
 	if current_progress >= current_mission.target:
+		last_mission_outcome = MISSION_SUCCESS
 		emit_signal("mission_completed", current_mission)
 		print("Completed mission ", current_mission.title)
 		
-		# TODO: figure out where to keep track of completed missions / achievements 
-		# TODO: figure out who will respond to these emitted signals and play audio 
-		current_mission = null
+		# Clean up
+		unload()

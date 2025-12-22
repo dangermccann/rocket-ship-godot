@@ -1,29 +1,54 @@
 extends Node
 
+const CRITICAL_ALERT 	= "STATUS-0_0"
+const HATCH 			= "STATUS-0_1"
+const AC_BUS_1 			= "STATUS-0_2"
+const MN_BUSS_B 		= "STATUS-0_3"
+const GLYCOL_TEMP 		= "STATUS-0_4"
+const CYRO_PRESS 		= "STATUS-1_0"
+const DOCKING_TARGET 	= "STATUS-1_1"
+const AC_BUS_2 			= "STATUS-1_2"
+const CREW_ALERT		= "STATUS-1_3"
+const ULAGE 			= "STATUS-1_4"
+const THRUST 			= "STATUS-2_0"
+const SPS_PRESS 		= "STATUS-2_1"
+const SPS_ROUGH_ECO 	= "STATUS-2_2"
+const SUIT_COMP 		= "STATUS-2_3"
+const O2_FLOW 			= "STATUS-2_4"
+
+const DOCKING_PROBE 	= "CONTROL-0"
+const GLYCOL_PUMP 		= "CONTROL-1"
+const SCE_POWER 		= "CONTROL-2"
+const WASTE_DUMP 		= "CONTROL-3"
+const CABIN_FAN 		= "CONTROL-4"
+const H20_FLOW 			= "CONTROL-5"
+const INT_LIGHTS 		= "CONTROL-6"
+
+
 var Leds: Dictionary[String, Led] = {
-	"STATUS-0_0": Led.new(0),
-	"STATUS-0_1": Led.new(1),
-	"STATUS-0_2": Led.new(2),
-	"STATUS-0_3": Led.new(3),
-	"STATUS-0_4": Led.new(4),
-	"STATUS-1_0": Led.new(5),
-	"STATUS-1_1": Led.new(6),
-	"STATUS-1_2": Led.new(7),
-	"STATUS-1_3": Led.new(8),
-	"STATUS-1_4": Led.new(9),
-	"STATUS-2_0": Led.new(10),
-	"STATUS-2_1": Led.new(11),
-	"STATUS-2_2": Led.new(12),
-	"STATUS-2_3": Led.new(13),
-	"STATUS-2_4": Led.new(14),
+	CRITICAL_ALERT: Led.new(0),
+	HATCH: Led.new(1),
+	AC_BUS_1: Led.new(2),
+	MN_BUSS_B: Led.new(3),
+	GLYCOL_TEMP: Led.new(4),
+	CYRO_PRESS: Led.new(5),
+	DOCKING_TARGET: Led.new(6),
+	AC_BUS_2: Led.new(7),
+	CREW_ALERT: Led.new(8),
+	ULAGE: Led.new(9),
+	THRUST: Led.new(10),
+	SPS_PRESS: Led.new(11),
+	SPS_ROUGH_ECO: Led.new(12),
+	SUIT_COMP: Led.new(13),
+	O2_FLOW: Led.new(14),
 	
-	"CONTROL-0": Led.new(18),
-	"CONTROL-1": Led.new(19),
-	"CONTROL-2": Led.new(20),
-	"CONTROL-3": Led.new(21),
-	"CONTROL-4": Led.new(15),
-	"CONTROL-5": Led.new(16),
-	"CONTROL-6": Led.new(17),
+	DOCKING_PROBE: Led.new(18),
+	GLYCOL_PUMP: Led.new(19),
+	SCE_POWER: Led.new(20),
+	WASTE_DUMP: Led.new(21),
+	CABIN_FAN: Led.new(15),
+	H20_FLOW: Led.new(16),
+	INT_LIGHTS: Led.new(17),
 	
 	"SECURITY-0": Led.new(22),
 	"SECURITY-1": Led.new(23)
@@ -79,13 +104,18 @@ var ControlInputs: Dictionary[String, ControlInput] = {
 	"ARM":	 	ControlInput.new(33,  ControlInput.TYPE_SWITCH, "ARM"),
 }
 
+var AnalogInputs: Dictionary[String, int] = {
+	"ANALOG_0": 0,
+	"ANALOG_1": 0,
+}
+
 func _ready() -> void:
 	GlobalEvents.serial_data_received.connect(_on_serial_data_received)
 	GlobalEvents.simulated_control_input.connect(_on_simulated_control_input)
 
 func _on_serial_data_received(data):
 	# Process specific joystick events
-	if data.begins_with("INPUT:") or data.begins_with("KEY:"):
+	if data.begins_with("INPUT:") or data.begins_with("KEY:") or data.begins_with("ANALOG:"):
 		var parts = data.split(":")
 		if parts.size() == 3:
 			var id = parts[1]
@@ -95,6 +125,8 @@ func _on_serial_data_received(data):
 				process_control_input(id.to_int(), state)
 			elif data.begins_with("KEY:"):
 				process_key(id, state)
+			elif data.begins_with("ANALOG:"):
+				process_analog(id, state)
 
 func _on_simulated_control_input(id, state):
 	process_control_input(id, state)
@@ -128,6 +160,18 @@ func process_joystick_input(id, state):
 	
 func process_key(key_id, state):
 	GlobalEvents.emit_signal("keypad_event", key_id)
+
+func process_analog(id, state):
+	var full_id = null
+	var val = int(state)
+	
+	match id:
+		"A0": full_id = "ANALOG_0"
+		"A1": full_id = "ANALOG_1"
+	
+	if full_id != null:
+		AnalogInputs[full_id] = val
+		GlobalEvents.emit_signal("input_state_changed", full_id, val)
 
 func find_control_input(id:int) -> ControlInput:
 	var keys: Array[String] = ControlInputs.keys()

@@ -1,7 +1,7 @@
 extends Camera3D # Or 'Camera' in older Godot 3.x versions
 
 # Configuration variables
-const ROTATION_SPEED = 10.0  # Speed of rotation in degrees per frame
+const ROTATION_SPEED = 20.0  # Speed of rotation in degrees per frame
 const MAX_PITCH_ANGLE = 75.0 # Limit how far up/down the pilot can look (75 degrees)
 const MAX_ROLL_ANGLE = 10.0 # Max roll angle for the mesh (e.g., 5 degrees)
 const MAX_MESH_PITCH_ANGLE  = 10.0 # Max pitch angle for the mesh (e.g., 5 degrees)

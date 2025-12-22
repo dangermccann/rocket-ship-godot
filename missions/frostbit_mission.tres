@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MissionData" load_steps=3 format=3 uid="uid://blu3eqnwo5vyk"]
+
+[ext_resource type="Script" uid="uid://ty1whsj0yqny" path="res://scripts/mission_data.gd" id="1_gc07b"]
+[ext_resource type="AudioStream" uid="uid://biy2ei28lgs0" path="res://audio/capcom/frostbit_start.mp3" id="2_t8mr5"]
+
+[resource]
+script = ExtResource("1_gc07b")
+mission_id = "frostbit_mission"
+title = "Frostbit Mission"
+description = "Collect the ice chunks"
+type = 2
+target = 5
+time_target = 45.0
+target_item = "Ice Chunk"
+ui_modal = "COLLECTION"
+start_audio = ExtResource("2_t8mr5")
+metadata/_custom_type_script = "uid://ty1whsj0yqny"

@@ -1,0 +1,119 @@
+[gd_scene load_steps=8 format=3 uid="uid://c3nidlxu8qq22"]
+
+[ext_resource type="Script" uid="uid://dk6yiup0517ha" path="res://scenes/ui/missions/panel_x.gd" id="1_id368"]
+[ext_resource type="Theme" uid="uid://dwbylkagb0b1s" path="res://ui/panel_theme.tres" id="1_n0f2f"]
+[ext_resource type="Texture2D" uid="uid://gng1siuoim0e" path="res://ui/controls/button_blue.png" id="2_id368"]
+[ext_resource type="Texture2D" uid="uid://dkpmc43xelvex" path="res://ui/controls/button_yellow.png" id="3_frf3i"]
+[ext_resource type="Texture2D" uid="uid://c64ycectodctk" path="res://ui/controls/button_green.png" id="4_ur2rx"]
+[ext_resource type="Texture2D" uid="uid://dlvbewtvda46a" path="res://ui/controls/button_white.png" id="5_inx0q"]
+[ext_resource type="Texture2D" uid="uid://cwd51l60w4ynn" path="res://ui/controls/button_black.png" id="6_2s8ad"]
+
+[node name="Panel1" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_id368")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -277.75
+offset_top = -304.75
+offset_right = 202.0
+offset_bottom = 209.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_n0f2f")
+
+[node name="GridContainer" type="GridContainer" parent="Panel"]
+layout_mode = 1
+offset_right = 458.0
+offset_bottom = 458.0
+columns = 3
+
+[node name="BOOSTER_0" type="TextureRect" parent="Panel/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("2_id368")
+expand_mode = 1
+
+[node name="BOOSTER_1" type="TextureRect" parent="Panel/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("3_frf3i")
+expand_mode = 1
+
+[node name="BOOSTER_2" type="TextureRect" parent="Panel/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("3_frf3i")
+expand_mode = 1
+
+[node name="BOOSTER_3" type="TextureRect" parent="Panel/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("4_ur2rx")
+expand_mode = 1
+
+[node name="BOOSTER_4" type="TextureRect" parent="Panel/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("5_inx0q")
+expand_mode = 1
+
+[node name="BOOSTER_5" type="TextureRect" parent="Panel/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("3_frf3i")
+expand_mode = 1
+
+[node name="BOOSTER_6" type="TextureRect" parent="Panel/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("2_id368")
+expand_mode = 1
+
+[node name="BOOSTER_7" type="TextureRect" parent="Panel/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("6_2s8ad")
+expand_mode = 1
+
+[node name="BOOSTER_8" type="TextureRect" parent="Panel/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("6_2s8ad")
+expand_mode = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Panel"]
+modulate = Color(0, 0.9814449, 0.98144466, 1)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -157.0
+offset_top = -38.0
+offset_right = -10.0
+offset_bottom = -9.0
+grow_horizontal = 0
+grow_vertical = 0
+value = 75.0
+show_percentage = false

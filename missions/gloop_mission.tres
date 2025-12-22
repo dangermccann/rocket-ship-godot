@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MissionData" load_steps=3 format=3 uid="uid://cl5a3pyr2eejt"]
+
+[ext_resource type="Script" uid="uid://ty1whsj0yqny" path="res://scripts/mission_data.gd" id="1_j0xxb"]
+[ext_resource type="AudioStream" uid="uid://3vfi76yb3gd2" path="res://audio/capcom/cyberion_prime_start.mp3" id="2_g57dq"]
+
+[resource]
+script = ExtResource("1_j0xxb")
+mission_id = "gloop_mission"
+title = "Gloop Mission "
+description = "Random Sequence"
+type = 1
+target = 4
+ui_modal = "ENTER_SEQUENCE"
+start_audio = ExtResource("2_g57dq")
+metadata/_custom_type_script = "uid://ty1whsj0yqny"

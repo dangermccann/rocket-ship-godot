@@ -1,8 +1,10 @@
 extends Node3D # Use this if you chose a standard Node3D
 
+signal ship_destroyed
+
 # Configuration variables
-const BASE_THRUST = 0.5 # Base speed of the ship
-const BOOSTER_THRUST = 50
+const BASE_THRUST = 1.2 # Base speed of the ship
+const BOOSTER_THRUST = 60.0
 const ACCELERATION_RATE = 5.0 # How quickly the ship reaches max speed (for smoothing)
 
 const STATE_FLYING = 0
@@ -15,12 +17,8 @@ const ROTATION_STRENGTH = 4.0 # How quickly the ship turns
 const SLOWDOWN_DISTANCE = 500.0 # Distance to begin slowing down
 const STOP_DISTANCE = 400.0 # Distance to stop warp and transition back to flying
 
-const EXPLOSION_SOUND = preload("res://audio/booster_1.wav")
-const WARP_SOUND = preload("res://audio/spaceEngine_000.ogg")
 const LASER_BEAM_SCENE = preload("res://assets/effects/LaserBeam.tscn")
-const LASER_SOUND = preload("res://audio/laserRetro_004.ogg")
 const IMPACT_SCENE = preload("res://assets/effects/ImpactEffect.tscn")
-const BARREL_ROLL_SOUND = preload("res://audio/phaserUp3.ogg")
 
 const BASE_FOV = 75.0
 const BOOST_FOV = 85.0
@@ -39,6 +37,7 @@ var booster_cooldown = 0
 var current_state = STATE_FLYING
 var target_planet_location = Vector3.ZERO
 var current_thrust_speed = BASE_THRUST
+var current_planet
 
 var roll_timer = 0.0
 var roll_direction = 1.0 # 1.0 for right roll, -1.0 for left roll
@@ -53,9 +52,6 @@ func _ready():
 	
 	audio_player.volume_db = 0
 	
-	# TODO: remove this test code
-	#MissionManager.start_mission(load("res://missions/test_sequence_mission.tres"))
-	
 func _process(delta):
 	var velocity = Vector3.ZERO
 	var target_fov = BASE_FOV
@@ -69,17 +65,21 @@ func _process(delta):
 		# Make the booster visuals appear while active
 		if(booster_cooldown > 0):
 			booster_cooldown -= delta
-			boosters_node.visible = true
+			
+			enable_boosters(true)
+			boost_particals.emitting = true
+			
 			current_thrust_speed = BOOSTER_THRUST
 			target_fov = BOOST_FOV
-			boost_particals.emitting = true
+			
 		else:
-			boosters_node.visible = false
-			current_thrust_speed = BASE_THRUST
+			enable_boosters(false)
 			boost_particals.emitting = false
 			
+			current_thrust_speed = BASE_THRUST
+		
 	elif current_state == STATE_WARPING:
-		boosters_node.visible = true
+		enable_boosters(true)
 		boost_particals.emitting = true
 		
 		target_fov = BOOST_FOV
@@ -104,17 +104,22 @@ func _process(delta):
 				current_state = STATE_FLYING
 				current_thrust_speed = BASE_THRUST
 				velocity = Vector3.ZERO
-				print("Warp complete. Entering stable orbit.")
-				boosters_node.visible = false
+				
+				booster_cooldown = 0
+				enable_boosters(false)
+				boost_particals.emitting = false
+				
 				audio_player.stop()
+				GlobalEvents.emit_signal("arrived_at_planet", current_planet)
+				print("Warp complete. Arrived at ", current_planet)
 				return # Exit early to prevent further movement this frame
 		
 		else:
 			# Accelerate up to max warp speed
 			current_thrust_speed = lerp(current_thrust_speed, MAX_WARP_SPEED, delta * ACCELERATION_RATE)
 	
+	# --- Barrel Roll Logic ---
 	elif current_state == STATE_ROLLING:
-		# --- Barrel Roll Logic ---
 		
 		# 1. Increment the timer
 		roll_timer += delta
@@ -150,7 +155,7 @@ func _process(delta):
 			# Example: $Camera.can_rotate = true
 			
 	elif current_state == STATE_DESTROYED:
-		current_thrust_speed = 0
+		current_thrust_speed = 0.0
 		boost_particals.emitting = false
 	
 	# Set camera field-of-view based on speed / state
@@ -162,22 +167,46 @@ func _process(delta):
 	
 	translate(desired_direction * BASE_THRUST * current_thrust_speed * delta)
 
+func enable_boosters(on: bool):
+	var led = ControlPanel.Leds[ControlPanel.THRUST]
+	if on:
+		boosters_node.visible = true
+		led.on()
+	else:
+		boosters_node.visible = false
+		led.off()
+
 func _on_booster_button(button):
 	if button == "BOOSTER_0":
-		booster_cooldown = 8 # TODO: assign varying durations based on the type of booster
+		booster_cooldown = 8 
 		boost_audio()
 	
 	if button == "BOOSTER_1":
 		if current_state == STATE_FLYING:
 			GlobalState.modal_ui(GlobalState.UI_STATE_WARP)
+			
+	if button == "BOOSTER_2":
+		if current_planet != null:
+			if MissionManager.last_mission_outcome == MissionManager.MISSION_SUCCESS:
+				get_tree().change_scene_to_file("res://scenes/landing.tscn")
+		
 
 func _on_warp_to(planet):
-	var node: Node3D = get_tree().root.get_node("/root/Main3D/Planets/" + planet)
+	current_planet = planet
 	
-	target_planet_location = node.position
+	var node: Node3D = get_tree().root.get_node("/root/Space/Planets/" + planet)
+	
+	# Assume MeshInstance3D is first child of planet scene
+	# TODO: Planets should be a scene that lets me get this reference properly 
+	var aabb = get_world_aabb(node.get_child(0).get_child(0))
+	var radius = aabb.size.z / 2.0
+	var dir_vector = (node.position - global_position).normalized()
+	var adjustment = Vector3(-(dir_vector * radius).x, radius / 2.0, -(dir_vector * radius).z)
+	
+	target_planet_location = node.position + adjustment
 	current_state = STATE_WARPING
 	print("Initiating warp to: ", target_planet_location)
-	audio_player.stream = WARP_SOUND
+	audio_player.stream = Sounds.WARP_SOUND
 	audio_player.play()
 
 func _on_joystick_event(input_action, state):
@@ -196,29 +225,10 @@ func _on_joystick_event(input_action, state):
 			do_barrel_roll(dir)
 
 func boost_audio():
-	audio_player.stream = EXPLOSION_SOUND
+	audio_player.stream = Sounds.BOOST_SOUND
 	audio_player.play()
 	
-func play_sound(sound: Resource):
-	# Create a new 3D player node
-	var player = AudioStreamPlayer.new()
-	
-	# Set the sound stream
-	player.stream = sound
-	
-	# Add the player to the scene tree
-	get_tree().root.add_child(player)
-	
-	# max volume is 0 db
-	player.volume_db = 0.0
-	
-	# Start playback
-	player.play()
-	
-	# Connect the signal that fires when the sound is finished
-	# This automatically removes the temporary node to clean up memory.
-	player.finished.connect(player.queue_free)
-	
+
 	
 # Function to be called when the trigger button is pressed
 func fire_laser():
@@ -226,7 +236,7 @@ func fire_laser():
 	laser_ray.force_raycast_update()
 	
 	var start_point = laser_spawner.global_position
-	var end_point = laser_spawner.global_position + (-laser_spawner.global_transform.basis.z * laser_ray.target_position.length())
+	var end_point = laser_spawner.global_position + (laser_spawner.global_transform.basis.z * laser_ray.target_position.length())
 	var hit_target = false
 	var hit_collision: RigidBody3D = null
 
@@ -240,12 +250,13 @@ func fire_laser():
 	
 	if hit_target and hit_collision.is_in_group("Astroids"):
 		_apply_damage_and_impact(hit_collision, end_point)
+		MissionManager.log_event(MissionManager.REMOVAL_EVENT, { "type": "Astroid", "quantity": "1" })
 		
-	play_sound(LASER_SOUND)
+	Sounds.play_sound(Sounds.LASER_SOUND)
 
 
 func _spawn_visual_beam(start_pos: Vector3, end_pos: Vector3, hit: bool):
-	var beam = LASER_BEAM_SCENE.instantiate()
+	var beam: Node3D = LASER_BEAM_SCENE.instantiate()
 	get_tree().root.add_child(beam)
 	
 	# Position the beam's root at the start point
@@ -255,7 +266,7 @@ func _spawn_visual_beam(start_pos: Vector3, end_pos: Vector3, hit: bool):
 	var length = start_pos.distance_to(end_pos)
 	
 	# Point the beam towards the target (or the end of range)
-	beam.look_at(end_pos, Vector3.UP, true) # 'true' makes it use global coordinates
+	beam.look_at(end_pos, Vector3.UP, false)
 	
 	# Scale the mesh to match the calculated length
 	# Note: This assumes your LaserBeam scene has a mesh scaled to 1 unit initially.
@@ -283,7 +294,7 @@ func do_barrel_roll(direction: float):
 	# Store the ship's current Z-rotation so we can roll relative to it
 	initial_roll_z = rotation.z 
 	
-	play_sound(BARREL_ROLL_SOUND)
+	Sounds.play_sound(Sounds.BARREL_ROLL_SOUND)
 	
 	
 func _on_area_3d_body_entered(body: Node3D) -> void:
@@ -292,11 +303,52 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		return
 	
 	if body.is_in_group("Astroids"):
-		var impact = IMPACT_SCENE.instantiate() 
-		get_tree().root.add_child(impact)
-		impact.global_position = mesh.global_position + Vector3(0, 0, -1)
+		collision_death()
 		
-		mesh.visible = false
-		current_state = STATE_DESTROYED
+	elif body.is_in_group("IceChunks"):
+		MissionManager.log_event(MissionManager.COLLECTION_EVENT, { "type": "Ice Chunk", "quantity": "1" })
+		# TODO: Figure out how to not assume it's the parent node in the tree
+		body.get_parent_node_3d().queue_free() 
 		
-		# TODO: display "game over" or similar and respawn at origin 
+		# TODO: Play some animation / particle effect
+		Sounds.play_sound(Sounds.COLLECT_SOUND)
+
+
+func _on_area_3d_area_entered(area: Area3D) -> void:
+	if current_state == STATE_WARPING or current_state == STATE_ROLLING:
+		return
+		
+	if area.is_in_group("Planets"):
+		collision_death()
+	
+func collision_death():
+	var impact = IMPACT_SCENE.instantiate() 
+	get_tree().root.add_child(impact)
+	impact.global_position = mesh.global_position + Vector3(0, 0, -1)
+	
+	mesh.visible = false
+	current_state = STATE_DESTROYED
+	audio_player.stop()
+	ship_destroyed.emit()
+
+# TODO: move this to a utility class?
+func get_world_aabb(mesh_instance_node: MeshInstance3D) -> AABB:
+	
+	# 1. Get the Mesh Resource
+	var this_mesh = mesh_instance_node.mesh
+	if this_mesh == null:
+		print("Error: MeshInstance3D does not have a mesh resource assigned.")
+		return AABB() # Return an empty AABB on error
+
+	# 2. Get the Local Bounding Box (AABB)
+	# This AABB is defined in the local space of the MeshInstance3D node.
+	var local_aabb: AABB = this_mesh.get_aabb()
+
+	# 3. Get the Global Transform
+	# This includes the node's position, rotation, and scale in the world.
+	var g_transform = mesh_instance_node.global_transform
+
+	# 4. Transform the AABB to World Coordinates	
+	var world_aabb = g_transform * local_aabb
+	
+	return world_aabb

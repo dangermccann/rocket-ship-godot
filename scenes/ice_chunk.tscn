@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dor36hik40fk8"]
+
+[ext_resource type="PackedScene" uid="uid://mhdbxoj7npio" path="res://assets/8_low_poly_asteroids.glb" id="1_opa4f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c1hgh"]
+albedo_color = Color(0.8090205, 0.9126373, 0.8504365, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cfa56"]
+radius = 1.0454102
+height = 2.1323242
+
+[node name="Chunk" instance=ExtResource("1_opa4f")]
+
+[node name="Object_2" parent="Sketchfab_model/rock_001_obj_cleaner_materialmerger_gles" index="0"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.35, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_c1hgh")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." index="1" groups=["IceChunks"]]
+collision_layer = 2
+collision_mask = 13
+gravity_scale = 0.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2785964, 0.25629863, -0.07265061)
+shape = SubResource("CapsuleShape3D_cfa56")

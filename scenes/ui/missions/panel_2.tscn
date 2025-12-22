@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://1ojqcw0tb1sl"]
+[gd_scene load_steps=5 format=3 uid="uid://clgtr30ix87vn"]
 
+[ext_resource type="Script" uid="uid://dk6yiup0517ha" path="res://scenes/ui/missions/panel_x.gd" id="1_kja6w"]
 [ext_resource type="Theme" uid="uid://dwbylkagb0b1s" path="res://ui/panel_theme.tres" id="1_weih2"]
 [ext_resource type="Texture2D" uid="uid://bf0jpa3vprtx" path="res://ui/controls/switch_off.png" id="2_kja6w"]
 [ext_resource type="Texture2D" uid="uid://c3aj7h1itapy7" path="res://ui/controls/button_red.png" id="3_38bfo"]
@@ -11,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_kja6w")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -27,7 +29,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_weih2")
 
-[node name="Switch0" type="TextureRect" parent="Panel"]
+[node name="ALARM_OVERRIDE" type="TextureRect" parent="Panel"]
 layout_mode = 0
 offset_left = 143.0
 offset_top = 61.0
@@ -37,7 +39,7 @@ texture = ExtResource("2_kja6w")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Switch1" type="TextureRect" parent="Panel"]
+[node name="POWER" type="TextureRect" parent="Panel"]
 layout_mode = 0
 offset_left = 143.0
 offset_top = 227.0
@@ -47,7 +49,7 @@ texture = ExtResource("2_kja6w")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Switch2" type="TextureRect" parent="Panel"]
+[node name="MODE" type="TextureRect" parent="Panel"]
 layout_mode = 0
 offset_left = 143.0
 offset_top = 393.0
@@ -57,7 +59,7 @@ texture = ExtResource("2_kja6w")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Button0" type="TextureRect" parent="Panel"]
+[node name="LAMP" type="TextureRect" parent="Panel"]
 layout_mode = 0
 offset_left = 440.0
 offset_top = 109.0
@@ -67,7 +69,7 @@ texture = ExtResource("3_38bfo")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Button1" type="TextureRect" parent="Panel"]
+[node name="ACK" type="TextureRect" parent="Panel"]
 layout_mode = 0
 offset_left = 440.0
 offset_top = 326.0
@@ -76,3 +78,13 @@ offset_bottom = 473.0
 texture = ExtResource("3_38bfo")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+modulate = Color(0, 0.9814449, 0.98144466, 1)
+layout_mode = 0
+offset_left = 772.0
+offset_top = 573.0
+offset_right = 919.0
+offset_bottom = 602.0
+value = 75.0
+show_percentage = false

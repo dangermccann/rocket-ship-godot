@@ -49,7 +49,7 @@ radius = 0.03
 height = 0.4
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2kvv3"]
-size = Vector3(2.78125, 0.6435547, 2.1555176)
+size = Vector3(2.78125, 0.6435547, 1.6715088)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2kvv3"]
 emission_shape_scale = Vector3(15, 15, -5)
@@ -74,6 +74,7 @@ size = Vector3(0.1, 0.1, 5)
 script = ExtResource("1_hpg4j")
 
 [node name="Camera3D" type="Camera3D" parent="."]
+far = 8000.0
 script = ExtResource("2_2577w")
 
 [node name="SpaceShipMesh" parent="Camera3D" instance=ExtResource("3_q8sbk")]
@@ -123,7 +124,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.9210258, -4.158259)
 collision_mask = 14
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0048828125, -0.06689453, -0.13586426)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0048828125, -0.06689453, 0.10614014)
 shape = SubResource("BoxShape3D_2kvv3")
 
 [node name="BoostParticals" type="GPUParticles3D" parent="Camera3D"]
@@ -136,4 +137,5 @@ draw_pass_1 = SubResource("BoxMesh_qcl01")
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
 
+[connection signal="area_entered" from="Camera3D/Area3D" to="." method="_on_area_3d_area_entered"]
 [connection signal="body_entered" from="Camera3D/Area3D" to="." method="_on_area_3d_body_entered"]

@@ -1,0 +1,169 @@
+[gd_scene load_steps=3 format=3 uid="uid://deq88lpkqkbmt"]
+
+[ext_resource type="Theme" uid="uid://cta8gkriusni1" path="res://ui/theme.tres" id="1_22ond"]
+[ext_resource type="Script" uid="uid://ow8vk7thqwu0" path="res://scenes/ui/missions/enter_sequence.gd" id="1_w0fp7"]
+
+[node name="EnterSequence" type="CanvasLayer"]
+script = ExtResource("1_w0fp7")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -472.5
+offset_top = -259.5
+offset_right = 472.5
+offset_bottom = 259.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_22ond")
+
+[node name="Title" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -387.0
+offset_right = 387.0
+offset_bottom = 145.0
+grow_horizontal = 2
+theme = ExtResource("1_22ond")
+theme_override_font_sizes/font_size = 80
+text = "Enter Secret Code"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Panel"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -309.0
+offset_top = -83.0
+offset_right = -183.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+border_color = Color(1, 1, 1, 1)
+border_width = 4.0
+editor_only = false
+
+[node name="ReferenceRect2" type="ReferenceRect" parent="Panel"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -145.0
+offset_top = -83.0
+offset_right = -19.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+border_color = Color(1, 1, 1, 1)
+border_width = 4.0
+editor_only = false
+
+[node name="ReferenceRect3" type="ReferenceRect" parent="Panel"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 19.0
+offset_top = -83.0
+offset_right = 145.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+border_color = Color(1, 1, 1, 1)
+border_width = 4.0
+editor_only = false
+
+[node name="ReferenceRect4" type="ReferenceRect" parent="Panel"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 178.0
+offset_top = -83.0
+offset_right = 304.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+border_color = Color(1, 1, 1, 1)
+border_width = 4.0
+editor_only = false
+
+[node name="Label1" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 167.5
+offset_top = 178.5
+offset_right = 290.5
+offset_bottom = 342.5
+theme = ExtResource("1_22ond")
+theme_override_font_sizes/font_size = 120
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 328.5
+offset_top = 178.5
+offset_right = 451.5
+offset_bottom = 342.5
+theme = ExtResource("1_22ond")
+theme_override_font_sizes/font_size = 120
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 494.5
+offset_top = 178.5
+offset_right = 617.5
+offset_bottom = 342.5
+theme = ExtResource("1_22ond")
+theme_override_font_sizes/font_size = 120
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 652.5
+offset_top = 178.5
+offset_right = 775.5
+offset_bottom = 342.5
+theme = ExtResource("1_22ond")
+theme_override_font_sizes/font_size = 120
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+modulate = Color(0, 0.9814449, 0.98144466, 1)
+offset_left = 882.0
+offset_top = 538.0
+offset_right = 1029.0
+offset_bottom = 567.0
+value = 75.0
+show_percentage = false

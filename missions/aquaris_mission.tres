@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="MissionData" load_steps=3 format=3 uid="uid://ds7uy2ocrbkjo"]
+
+[ext_resource type="Script" uid="uid://ty1whsj0yqny" path="res://scripts/mission_data.gd" id="1_eooeg"]
+[ext_resource type="AudioStream" uid="uid://ceiqcgb11gqgw" path="res://audio/capcom/aquaris_start.mp3" id="2_t7bbx"]
+
+[resource]
+script = ExtResource("1_eooeg")
+mission_id = "aquaris_mission"
+title = "Aquaris Mission"
+description = "Enter the secret code"
+target = 1
+time_target = 10.0
+target_state = Dictionary[String, String]({
+"BOOSTER_4": "PRESSED",
+"BOOSTER_7": "PRESSED",
+"BOOSTER_8": "PRESSED"
+})
+ui_modal = "PANEL_1"
+start_audio = ExtResource("2_t7bbx")
+metadata/_custom_type_script = "uid://ty1whsj0yqny"

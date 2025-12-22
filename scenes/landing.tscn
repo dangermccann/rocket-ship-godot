@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://d26w1on1385aj"]
+
+[ext_resource type="Script" uid="uid://ux8ycpwmq3yi" path="res://scenes/landing.gd" id="1_8ljda"]
+[ext_resource type="Texture2D" uid="uid://dv7is476bfft4" path="res://assets/skybox_space_nebula_0.jpg" id="1_usvfl"]
+[ext_resource type="PackedScene" uid="uid://cmrd5mjyos2nf" path="res://scenes/space_ship/space_ship_basic.tscn" id="2_usvfl"]
+[ext_resource type="PackedScene" uid="uid://dhij4t7fgna3s" path="res://assets/Space Platform.glb" id="3_j5py0"]
+[ext_resource type="PackedScene" uid="uid://c3nidlxu8qq22" path="res://scenes/ui/missions/panel_1.tscn" id="5_j5py0"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_yp7d7"]
+panorama = ExtResource("1_usvfl")
+
+[sub_resource type="Sky" id="Sky_x4ofr"]
+sky_material = SubResource("PanoramaSkyMaterial_yp7d7")
+
+[sub_resource type="Environment" id="Environment_ahygv"]
+background_mode = 2
+sky = SubResource("Sky_x4ofr")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bfh6i"]
+albedo_color = Color(0.40517765, 0.43130353, 0.32291707, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vpb78"]
+material = SubResource("StandardMaterial3D_bfh6i")
+
+[node name="Landing" type="Node3D"]
+script = ExtResource("1_8ljda")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ahygv")
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1000, 0, 0, 0, 1, 0, 0, 0, 1000, 0, 0, 0)
+mesh = SubResource("PlaneMesh_vpb78")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5607546, 0.82798207, 0, -0.82798207, 0.5607546, 0, 452.36932, 0)
+light_energy = 0.808
+
+[node name="Ship Parent" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32.510284, 0)
+
+[node name="Space Ship Basic" parent="Ship Parent" instance=ExtResource("2_usvfl")]
+transform = Transform3D(-1, 8.742278e-08, 3.821371e-15, 0, -4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, 0, 0, 0)
+
+[node name="Light1" type="SpotLight3D" parent="Ship Parent"]
+transform = Transform3D(1, 0, 0, 0, -0.0057071745, 0.9999837, 0, -0.9999838, -0.0057071745, 4.815743, -2.9192638, 0)
+light_color = Color(0.67189306, 0.9822071, 0.8439394, 1)
+light_energy = 0.5
+spot_range = 31.508
+spot_attenuation = -1.21
+spot_angle = 37.62
+
+[node name="Light2" type="SpotLight3D" parent="Ship Parent"]
+transform = Transform3D(1, 0, 0, 0, -0.0057071745, 0.9999837, 0, -0.9999838, -0.0057071745, -5.48078, -2.9192638, 0)
+light_color = Color(0.67189306, 0.9822071, 0.8439394, 1)
+light_energy = 0.5
+spot_range = 31.508
+spot_attenuation = -1.21
+spot_angle = 37.62
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99994826, -0.010175081, 0, 0.010175081, 0.99994826, 0, 16.717789, 45.903248)
+fov = 53.4
+
+[node name="Landing Platform" parent="." instance=ExtResource("3_j5py0")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Panel1" parent="CanvasLayer" instance=ExtResource("5_j5py0")]

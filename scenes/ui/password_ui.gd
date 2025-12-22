@@ -2,7 +2,6 @@ extends Control
 
 @onready var line_edit = $Panel/LineEdit
 @onready var lock_image = $Panel/Lock
-@onready var audio = $AudioStreamPlayer
 
 var entered = ""
 var unlock_cooldown = 0
@@ -12,17 +11,12 @@ const PWD = "1353"
 const LOCK_RES   = preload("res://ui/images/locked.png")
 const UNLOCK_RES = preload("res://ui/images/unlocked.png")
 
-const KEY_SOUND = preload("res://audio/tone1.ogg")
-const ERROR_SOUND = preload("res://audio/phaserDown3.ogg")
-const SUCCESS_SOUND = preload("res://audio/powerUp7.ogg")
-
-const MAIN_SCENE: String = "res://scenes/main_3d.tscn"
+const MAIN_SCENE: String = "res://scenes/space.tscn"
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GlobalEvents.keypad_event.connect(_on_keypad_event)
-	audio.volume_db = 0.0
 	var timer = get_tree().create_timer(1)
 	timer.timeout.connect(_on_timeout)
 	reset()
@@ -57,12 +51,10 @@ func _on_keypad_event(key_id):
 			entered = ""
 			line_edit.text = ""
 			
-			audio.stream = ERROR_SOUND
-			audio.play()
+			Sounds.play_sound(Sounds.ERROR_SOUND)
 			
 		else:
-			audio.stream = KEY_SOUND
-			audio.play()
+			Sounds.play_sound(Sounds.KEY_SOUND)
 
 func lock_led():
 	ControlPanel.Leds["SECURITY-0"].off()
@@ -77,8 +69,7 @@ func success():
 	unlock_cooldown = 2
 	lock_image.texture = UNLOCK_RES
 	
-	audio.stream = SUCCESS_SOUND
-	audio.play()
+	Sounds.play_sound(Sounds.SUCCESS_SOUND)
 	
 	lock_led()
 

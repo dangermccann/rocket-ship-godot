@@ -1,13 +1,14 @@
 [gd_scene load_steps=5 format=3 uid="uid://qoexvfneqli0"]
 
 [ext_resource type="PackedScene" uid="uid://mhdbxoj7npio" path="res://assets/8_low_poly_asteroids.glb" id="1_c1hgh"]
-[ext_resource type="Script" uid="uid://bih8phnqdhyvn" path="res://assets/astroids/astroid.gd" id="2_3dij8"]
+[ext_resource type="Script" uid="uid://bih8phnqdhyvn" path="res://scenes/astroids/astroid.gd" id="2_3dij8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c1hgh"]
 albedo_color = Color(0.2324369, 0.2045291, 0.15232489, 1)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_c1hgh"]
-radius = 0.9850408
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e7a17"]
+radius = 0.92871094
+height = 2.366394
 
 [node name="Astroid" instance=ExtResource("1_c1hgh")]
 
@@ -22,5 +23,5 @@ gravity_scale = 0.0
 script = ExtResource("2_3dij8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1913497, 0.33917034, -0.055567205)
-shape = SubResource("SphereShape3D_c1hgh")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2861998, 0.33382976, -0.055567205)
+shape = SubResource("CapsuleShape3D_e7a17")

@@ -1,0 +1,65 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxmocx8b1ndch"]
+
+[ext_resource type="PackedScene" uid="uid://dor36hik40fk8" path="res://scenes/ice_chunk.tscn" id="1_1q3x4"]
+
+[node name="IceBelt" type="Node3D"]
+
+[node name="Chunk1" parent="." instance=ExtResource("1_1q3x4")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.15326655, 0.36324906, -3.8983672)
+
+[node name="Chunk11" parent="." instance=ExtResource("1_1q3x4")]
+transform = Transform3D(0.27370682, 0.12281928, -9.673562e-10, -0.1225385, 0.27308112, 0.020273989, 0.008300124, -0.018497098, 0.29931417, -3.1068034, 0.36324906, -5.666381)
+
+[node name="Chunk2" parent="." instance=ExtResource("1_1q3x4")]
+transform = Transform3D(0.3836945, 0, 0.32059088, 0, 0.5, 0, -0.32059088, 0, 0.3836945, 2.8509965, 0.36324906, -5.370715)
+
+[node name="Chunk3" parent="." instance=ExtResource("1_1q3x4")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.077404, 0.36324906, -8.805118)
+
+[node name="Chunk9" parent="." instance=ExtResource("1_1q3x4")]
+transform = Transform3D(0.3052039, 0, -0.39604363, 0.070636645, 0.49198303, 0.054434866, 0.3896935, -0.08917786, 0.30031028, -4.5691414, 1.7660358, -8.805118)
+
+[node name="Chunk4" parent="." instance=ExtResource("1_1q3x4")]
+transform = Transform3D(0.5, 0, 0, 0, 0.43531528, 0.2459687, 0, -0.2459687, 0.43531528, 3.3720994, 1.7285588, -8.805118)
+
+[node name="Chunk10" parent="." instance=ExtResource("1_1q3x4")]
+transform = Transform3D(0.45, 0, 0, 0, 0.4094565, 0.18666913, 0, -0.18666913, 0.4094565, 1.6640682, 2.5390122, -8.805118)
+
+[node name="Chunk5" parent="." instance=ExtResource("1_1q3x4")]
+transform = Transform3D(0.5143027, -0.035676025, 0.19162476, 0.10342773, 0.5082586, -0.18296437, -0.16521361, 0.20712428, 0.48197925, 4.998215, 1.7285588, -11.876492)
+
+[node name="Chunk6" parent="." instance=ExtResource("1_1q3x4")]
+transform = Transform3D(0.17521022, -0.031546913, -0.57298005, -0.13336974, 0.58044904, -0.072740965, 0.55813426, 0.14860527, 0.16248874, 4.767261, 0.2909708, -16.748419)
+
+[node name="Chunk7" parent="." instance=ExtResource("1_1q3x4")]
+transform = Transform3D(0.3919969, -2.8642324e-09, 0.45424494, 0.3369697, 0.40235698, -0.29079258, -0.3046144, 0.44509423, 0.26287115, 0.3195498, 1.1291819, -16.748419)
+
+[node name="Chunk17" parent="." instance=ExtResource("1_1q3x4")]
+transform = Transform3D(0.35, 0, 0, 0, 0.2889725, 0.19747122, 0, -0.19747122, 0.2889725, -2.0797634, 3.6724749, -16.748419)
+
+[node name="Chunk8" parent="." instance=ExtResource("1_1q3x4")]
+transform = Transform3D(0.4446683, 0, 0.22862658, 0, 0.5, 0, -0.22862658, 0, 0.4446683, -3.0856779, -0.28640985, -16.748419)
+
+[node name="Chunk12" parent="." instance=ExtResource("1_1q3x4")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -2.060396, 0.68883324, -26.229492)
+
+[node name="Chunk18" parent="." instance=ExtResource("1_1q3x4")]
+transform = Transform3D(0.28280824, 0.5852516, 0, -0.5852516, 0.28280824, 0, 0, 0, 0.65, -2.060396, 2.365055, -27.31985)
+
+[node name="Chunk13" parent="." instance=ExtResource("1_1q3x4")]
+transform = Transform3D(0.4, 0, 0, 0, 0.35404056, 0.1861593, 0, -0.1861593, 0.35404056, 1.5150447, 0.68883324, -26.229492)
+
+[node name="Chunk16" parent="." instance=ExtResource("1_1q3x4")]
+transform = Transform3D(0.36841455, 0, 0.33803952, 0, 0.5, 0, -0.33803952, 0, 0.36841455, 0.28199244, 2.8483543, -28.626495)
+
+[node name="Chunk14" parent="." instance=ExtResource("1_1q3x4")]
+transform = Transform3D(0.35, 0, 0, 0, 0.30807436, -0.16610296, 0, 0.16610296, 0.30807436, 3.8561559, 0.68883324, -30.539604)
+
+[node name="Chunk19" parent="." instance=ExtResource("1_1q3x4")]
+transform = Transform3D(0.48776728, -0.1099231, 0, 0.1099231, 0.48776728, 0, 0, 0, 0.5, 1.3623433, 0.68883324, -42.01941)
+
+[node name="Chunk20" parent="." instance=ExtResource("1_1q3x4")]
+transform = Transform3D(0.21964742, 0, 0.55835027, 0, 0.6, 0, -0.55835027, 0, 0.21964742, -2.3463893, -0.67309666, -40.054302)
+
+[node name="Chunk15" parent="." instance=ExtResource("1_1q3x4")]
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 3.8561559, 0.68883324, -21.974663)

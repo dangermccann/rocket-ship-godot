@@ -4,7 +4,7 @@ const TYPE_BUTTON: String = "BUTTON"
 const TYPE_SWITCH: String = "SWITCH"
 const PRESSED: String	  = "PRESSED"
 const RELEASED: String	  = "RELEASED"
-const ON: String		  	  = "ON"
+const ON: String		  = "ON"
 const OFF: String		  = "OFF"
 
 var id:int 
